@@ -24,8 +24,6 @@ class CreateSpeeches extends Component {
 componentDidUpdate = (prevprops, state) => {
   if (this.props.id !== prevprops.id){
     this.setState({
-      // name: this.props.name,
-      // anime: this.props.anime,
       is_public: this.props.is_public
     })
   }
@@ -56,7 +54,7 @@ componentDidUpdate = (prevprops, state) => {
       title: title,
       message: message,
       tag: tag,
-      visible: is_public,
+      isPublic: is_public,
       owner
     })
     .then(() => {
