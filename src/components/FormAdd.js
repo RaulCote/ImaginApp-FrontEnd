@@ -3,7 +3,7 @@ import { withAuth } from '../lib/authContext';
 import speechService from '../lib/speech-service';
 
 
-class Form extends Component {
+class FormAdd extends Component {
   state = {
     title: '',
     message: '',
@@ -19,16 +19,12 @@ componentDidUpdate = (prevprops, state) => {
       is_Public: this.props.is_Public
     })
   }
-
 }
-
 
   handleInput = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
     })
-   
-
   }
 
   handleSubmit = (event) => {
@@ -37,7 +33,6 @@ componentDidUpdate = (prevprops, state) => {
     let arrayTag = []
     arrayTag.push(tag);
  
-
       speechService.addSpeech({
       title: title,
       message: message,
@@ -55,8 +50,7 @@ componentDidUpdate = (prevprops, state) => {
       })
     })
   }
-  
-  
+    
   render() {
     return (
       <div>
@@ -65,12 +59,10 @@ componentDidUpdate = (prevprops, state) => {
           <div>Message: <textarea name="message" placeholder="message" onChange={this.handleInput}></textarea></div>
           <div>Tag: <input type="text" name="tag" placeholder="tag" onChange={this.handleInput}></input></div>
           
-
           <div className="radio">Public:
             <input type="radio" id="is_Public" name="is_Public" value="true" required onClick={this.handleInput}/></div>
           <div className="radio">Private:
             <input type="radio" id="is_not_Public" name="is_Public" value="false" onClick={this.handleInput}/></div>
-
 
           <div><input type="submit" value="Create speech" /></div>
         </form>
@@ -80,4 +72,4 @@ componentDidUpdate = (prevprops, state) => {
   }
 }
 
-export default  withAuth(Form);
+export default  withAuth(FormAdd);

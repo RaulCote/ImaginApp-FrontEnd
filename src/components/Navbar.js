@@ -7,7 +7,8 @@ class Navbar extends Component {
     return (
       <div className="navbar">
         {isLogged ? <div>
-          <p>username: {this.props.user.name}</p>
+          <p>username: {this.props.user.username}</p>
+          <p>CurrenUserId: {this.props.user._id}</p>
           <p onClick={this.props.logout}>Logout</p>
           <Link to='/speeches'>World</Link>
           <Link to='/profile/speeches'>Your Speeches</Link>
