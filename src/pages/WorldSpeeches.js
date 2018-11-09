@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import speechService from '../lib/speech-service'; 
+import { Link } from 'react-router-dom';
 
 class WorldSpeeches extends Component {
 
@@ -35,7 +36,7 @@ class WorldSpeeches extends Component {
         <h1>Speaches Search</h1>
         {isLoading ? <h2>Loading...</h2> : speeches.map((speech, index) => {
           return <div key={index}>
-            <div>{speech.title}</div>
+            <div><Link key={speech._id} to={`/speeches/${speech._id}`}>{speech.title}</Link></div>
             </div>
         } )}
       </div>
