@@ -13,6 +13,11 @@ class SpeechService {
       .then(({ data }) => data )
   }
 
+  getSpeechId(id) {
+    return this.speechService.get(`/speeches/${id}`)
+      .then(({ data }) => data )
+  }
+
   addSpeech(body) {
     return this.speechService.post('/speeches', body)
       .then(({ data }) => data )

@@ -10,6 +10,7 @@ import WorldSpeeches from './pages/WorldSpeeches';
 import AuthContext from './lib/authContext';
 import CreateSpeeches from './pages/CreateSpeeches';
 import YourSpeeches from './pages/YourSpeeches';
+import SpeechDetail from './pages/SpeechDetail';
 
 
 class App extends Component {
@@ -22,9 +23,10 @@ class App extends Component {
             <Switch>
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />   
-              <Route path="/speeches" component={WorldSpeeches} /> 
+              <Route exact path="/speeches" component={WorldSpeeches} /> 
               <Route exact path="/profile/speeches" component={YourSpeeches} />
-              <Route exact path="/profile/speeches/new" component={CreateSpeeches} />       
+              <Route exact path="/profile/speeches/new" component={CreateSpeeches} />    
+              <Route exact path="/speeches/:id" component={SpeechDetail} />   
               <PrivateRoute path="/private" component={Private} />
             </Switch>
           </div>
