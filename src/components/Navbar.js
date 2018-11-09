@@ -10,6 +10,7 @@ class Navbar extends Component {
           <p>username: {this.props.user.name}</p>
           <p onClick={this.props.logout}>Logout</p>
           <Link to='/speeches'>World</Link>
+          <Link to='/profile/speeches'>Your Speeches</Link>
           <Link to='/profile/speeches/new'>Create Speeches</Link>
         </div> : <div>
           <Link to='/login'>Login</Link>

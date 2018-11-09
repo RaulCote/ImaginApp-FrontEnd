@@ -22,32 +22,27 @@ class CreateSpeeches extends Component {
 
   // }
 componentDidUpdate = (prevprops, state) => {
-
-if (this.props.id !== prevprops.id){
-  this.setState({
-    // name: this.props.name,
-    // anime: this.props.anime,
-    is_public: this.props.is_public
-  })
+  if (this.props.id !== prevprops.id){
+    this.setState({
+      // name: this.props.name,
+      // anime: this.props.anime,
+      is_public: this.props.is_public
+    })
+  }
 }
-}
-
-
 
 
   handleInput = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
     })
-    console.log(event.target.name);
-    console.log(event.target.value);
+    // console.log(event.target.name);
+    // console.log(event.target.value);
 
-    const {is_public} = this.state;
+    const { is_public } = this.state;
     console.log(is_public);
 
   }
-  
-
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -74,10 +69,10 @@ if (this.props.id !== prevprops.id){
       })
     })
   }
+
   render() {
     return (
       <div>
-        <h1>{this.props.user._id}</h1>
         <h1>Create Speeches</h1>
         <form onSubmit={this.handleSubmit}>
           <div>Title: <input type="text" name="title" placeholder="title" onChange={this.handleInput}></input></div>
@@ -93,6 +88,7 @@ if (this.props.id !== prevprops.id){
 
           <div><input type="submit" value="Create speech" /></div>
         </form>
+        <p>Should redirect to YourSpeeches after submiting form.</p>
       </div>
     )
   }
