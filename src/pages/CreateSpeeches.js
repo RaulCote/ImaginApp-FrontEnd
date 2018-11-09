@@ -8,29 +8,60 @@ class CreateSpeeches extends Component {
     title: '',
     message: '',
     tag: '',
-    visible: true,
+    is_public: 'false',
     owner: this.props.user._id,
   }
+
+  // constructor(props){
+  //   super(props);
+  //   this.state = {
+  //     name: props.name,
+  //     anime:props.anime,
+  //     id: props.id,
+  //   }
+
+  // }
+componentDidUpdate = (prevprops, state) => {
+
+if (this.props.id !== prevprops.id){
+  this.setState({
+    // name: this.props.name,
+    // anime: this.props.anime,
+    is_public: this.props.is_public
+  })
+}
+}
+
+
+
 
   handleInput = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
     })
+    console.log(event.target.name);
+    console.log(event.target.value);
+
+    const {is_public} = this.state;
+    console.log(is_public);
+
   }
   
+
+
   handleSubmit = (event) => {
     event.preventDefault();
-    const { title, message, tag, visible, owner } = this.state;
+    const { title, message, tag, is_public, owner } = this.state;
     let arrayTag = []
     arrayTag.push(tag);
-    let visible2 = !visible;
-    console.log(visible2, 'visible 2 este')
+    // let visible2 = !visible;
+    // console.log(visible2, 'visible 2 este')
 
       speechService.addSpeech({
       title: title,
       message: message,
       tag: tag,
-      visible: visible2,
+      visible: is_public,
       owner
     })
     .then(() => {
@@ -39,7 +70,7 @@ class CreateSpeeches extends Component {
         title: '',
         message: '',
         tag: '',
-        visible: '',
+        is_public: 'false',
       })
     })
   }
@@ -52,7 +83,14 @@ class CreateSpeeches extends Component {
           <div>Title: <input type="text" name="title" placeholder="title" onChange={this.handleInput}></input></div>
           <div>Message: <textarea name="message" placeholder="message" onChange={this.handleInput}></textarea></div>
           <div>Tag: <input type="text" name="tag" placeholder="tag" onChange={this.handleInput}></input></div>
-          <div>Public: <input type="checkbox" name="visible" onChange={this.handleSubmit} /></div>
+          
+
+          <div className="radio">Public:
+            <input type="radio" id="is_public" name="is_public" value="true" required onClick={this.handleInput}/></div>
+          <div className="radio">Private:
+            <input type="radio" id="is_not_public" name="is_public" value="false" onClick={this.handleInput}/></div>
+
+
           <div><input type="submit" value="Create speech" /></div>
         </form>
       </div>
