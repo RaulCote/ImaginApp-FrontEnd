@@ -23,6 +23,11 @@ class SpeechService {
       .then(({ data }) => data )
   }
 
+  getEditSpeechId(id,body) {
+    return this.speechService.get(`/speeches/${id}`,body)
+      .then(({ data }) => data )
+  }
+
 }
 
 const speechService = new SpeechService();
