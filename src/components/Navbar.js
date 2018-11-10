@@ -8,6 +8,10 @@ class Navbar extends Component {
       <div className="navbar">
         {isLogged ? <div>
           <p>username: {this.props.user.username}</p>
+<<<<<<< HEAD
+=======
+          <p>CurrenUserId: {this.props.user._id}</p>
+>>>>>>> 255773e27ae32478c96a5f9a1a4ba233f82e76fe
           <p onClick={this.props.logout}>Logout</p>
           <Link to='/speeches'>World</Link>
           <Link to='/profile/speeches'>Your Speeches</Link>

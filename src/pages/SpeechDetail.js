@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import speechService from '../lib/speech-service'; 
+import { withAuth } from '../lib/authContext';
+import FormEdit from '../components/FormEdit';
 
 class SpeechDetail extends Component {
 
@@ -33,8 +35,15 @@ renderUpdate = () => {
 
     return (
       <div>
+<<<<<<< HEAD
         {isLoading ? <h1>Loading</h1> : <div><h1>{speech.title}</h1><h2>{speech.owner}</h2></div>} 
 
+=======
+        {isLoading ? <h1>Loading</h1> : <div><FormEdit speech={speech}/><h1>{speech.title}</h1>
+        <h2>{speech.owner}</h2>
+        <h3>{this.props.user._id}</h3></div>}
+        
+>>>>>>> 255773e27ae32478c96a5f9a1a4ba233f82e76fe
 
         <h2>Speech Detail</h2>   
         <h3>Hello</h3> 
@@ -43,4 +52,4 @@ renderUpdate = () => {
   }
 }
 
-export default SpeechDetail;
+export default withAuth(SpeechDetail);
