@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import speechService from '../lib/speech-service'; 
 import { Link } from 'react-router-dom';
+import queryString from 'query-string';
+// const queryString = require('query-string');
 
 class WorldSpeeches extends Component {
 
   state = {
     speeches: [],
     isLoading: true,
+    // values: queryString.parse(this.props.location.search),
   }
 
   componentDidMount() {
@@ -14,14 +17,23 @@ class WorldSpeeches extends Component {
   }
 
   renderUpdate = () => {
+    const valueSearch = queryString.parse(this.props.location.search);
+    const valueSearch2 = this.props.location.search;//queryString.stringify(valueSearch);
+    
+
     this.setState({
       isLoading: true,
+      values: valueSearch2,
     });
+    const values = this.state.values;
+    console.log('value ', valueSearch)
+    console.log('value2', valueSearch2)
     speechService.getSpeech()
       .then(result => {
         this.setState({
           speeches: result,
           isLoading: false,
+          values: {}
         })
       })
       .catch(error => {
@@ -31,6 +43,9 @@ class WorldSpeeches extends Component {
 
   render() {
     const { speeches, isLoading } = this.state;
+    // console.log(this.props.location);
+    
+
     return (
       <div>
         <h1>Speaches Search</h1>
