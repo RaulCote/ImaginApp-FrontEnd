@@ -33,7 +33,8 @@ renderUpdate = () => {
 
     return (
       <div>
-        {isLoading ? <h1>Loading</h1> : <h1>{speech.title}</h1>}
+        {isLoading ? <h1>Loading</h1> : <div><h1>{speech.title}</h1><h2>{speech.owner}</h2></div>} 
+
 
         <h2>Speech Detail</h2>   
         <h3>Hello</h3> 
