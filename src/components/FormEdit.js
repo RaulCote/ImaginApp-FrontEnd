@@ -7,7 +7,7 @@ class FormEdit extends Component {
   state = {
     title: this.props.speech.title,
     message: this.props.speech.message,
-    tag: this.props.speech.tag,
+    tag: this.props.speech.tag[0],
     is_Public: this.props.speech.is_Public,
     owner: this.props.user._id,
   }
@@ -69,16 +69,16 @@ componentDidUpdate = (prevprops, state) => {
     return (
       <div>
         <form  onSubmit={this.handleSubmit}>
-          <div>Title: <input type="text" name="title" placeholder="title" value={title} onChange={this.handleInput}></input></div>
-          <div>Message: <textarea name="message" placeholder="message" onChange={this.handleInput}></textarea></div>
-          <div>Tag: <input type="text" name="tag" placeholder="tag" value={tag} onChange={this.handleInput}></input></div>
+          <div>Title: <input type="text" disabled={!equal} name="title" placeholder="title" value={title} onChange={this.handleInput}></input></div>
+          <div>Message: <textarea name="message"  disabled={!equal} placeholder="message" onChange={this.handleInput}></textarea></div>
+          <div>Tag: <input type="text"  disabled={!equal} name="tag" placeholder="tag" value={tag} onChange={this.handleInput}></input></div>
           
           <div className="radio">Public:
             <input type="radio" id="is_Public" name="is_Public" value="true" required onClick={this.handleInput}/></div>
           <div className="radio">Private:
             <input type="radio" id="is_not_Public" name="is_Public" value="false" onClick={this.handleInput}/></div>
-    { equal ? <h1>Prueba<input type="text"/></h1> : <div></div> }
-          <div><input type="submit" value="Save speech" /></div>
+          { equal ? <div><input type="submit" value="Save speech" /></div> : <div></div> }
+          
         </form>
         
       </div>

@@ -13,6 +13,11 @@ class SpeechService {
       .then(({ data }) => data )
   }
 
+  getMySpeeches(id) {
+    return this.speechService.get(`/speeches?id=${id}`)
+      .then(({ data }) => data )
+  }
+
   getSpeechId(id) {
     return this.speechService.get(`/speeches/${id}`)
       .then(({ data }) => data )
@@ -24,7 +29,7 @@ class SpeechService {
   }
 
   getEditSpeechId(id,body) {
-    return this.speechService.get(`/speeches/${id}`,body)
+    return this.speechService.put(`/speeches/${id}`,body)
       .then(({ data }) => data )
   }
 
