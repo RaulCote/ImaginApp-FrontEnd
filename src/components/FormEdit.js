@@ -65,7 +65,8 @@ componentDidUpdate = (prevprops, state) => {
     if (this.props.user._id === this.props.speech.owner){
       equal = true;
     } 
-    const {title,tag, message} = this.state;
+    const {title,tag, message, is_Public} = this.state;
+    console.log(is_Public);
     return (
       <div>
         <form  onSubmit={this.handleSubmit}>
