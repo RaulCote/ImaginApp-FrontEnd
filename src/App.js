@@ -11,6 +11,7 @@ import AuthContext from './lib/authContext';
 import CreateSpeeches from './pages/CreateSpeeches';
 import YourSpeeches from './pages/YourSpeeches';
 import SpeechDetail from './pages/SpeechDetail';
+import Profile from './pages/Profile';
 
 
 class App extends Component {
@@ -27,6 +28,7 @@ class App extends Component {
               <Route exact path="/profile/speeches" component={YourSpeeches} />
               <Route exact path="/profile/speeches/new" component={CreateSpeeches} />    
               <Route exact path="/speeches/:id" component={SpeechDetail} />   
+              <Route exact path="/profile" component={Profile} />
               <PrivateRoute path="/private" component={Private} />
             </Switch>
           </div>

@@ -13,6 +13,7 @@ class Navbar extends Component {
           <Link to='/speeches'>World</Link>
           <Link to='/profile/speeches'>Your Speeches</Link>
           <Link to='/profile/speeches/new'>Create Speeches</Link>
+          <Link to='/profile'>Profile</Link>
         </div> : <div>
           <Link to='/login'>Login</Link>
           <Link to='/signup'>Signup</Link>
