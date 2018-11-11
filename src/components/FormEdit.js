@@ -10,25 +10,49 @@ class FormEdit extends Component {
     tag: this.props.speech.tag[0],
     is_Public: this.props.speech.is_Public,
     owner: this.props.user._id,
+    checked: !(this.props.speech.is_Public),
   }
 
   componentDidMount(){
     this.setState({
       title: this.props.speech.title,
-     message: this.props.speech.message,
-     tag: this.props.speech.tag,
-     is_Public: this.props.speech.is_Public,
-     owner: this.props.user._id,
+      message: this.props.speech.message,
+      tag: this.props.speech.tag,
+      is_Public: this.props.speech.is_Public,
+      owner: this.props.user._id,
+      checked: this.props.speech.is_Public,
     })
+    console.log('Is public peta', this.props.speech.is_Public)
   }
 
-componentDidUpdate = (prevprops, state) => {
-  if (this.props.id !== prevprops.id){
-    this.setState({
-      is_Public: this.props.is_Public
-    })
+  static componentWillReceiveProps(nextProps) {
+    if (nextProps.is_Public !== this.props.is_Public) {
+        return {is_Public: nextProps.is_Public}
+    }else{
+       return null;     
+    }
   }
-}
+
+  componentDidUpdate(prevProps, prevState) {
+    if(prevProps.is_Public!==this.props.is_Public){
+      //Perform some operation here
+      this.setState({is_Public: prevProps.is_Public});
+      this.classMethod();
+    }
+
+    }
+   
+   //https://hackernoon.com/replacing-componentwillreceiveprops-with-getderivedstatefromprops-c3956f7ce607
+
+//   componentDidUpdate = (prevprops, state) => {
+//   if (this.props.is_Public !== prevprops.is_Public){
+//     this.setState({
+//       is_Public: this.props.is_Public,
+//       checked: this.props.is_Public
+//     })
+//   }
+// }
+
 
   handleInput = (event) => {
     this.setState({
@@ -36,9 +60,27 @@ componentDidUpdate = (prevprops, state) => {
     })
   }
 
+  handleRadioButton = (event) => {
+    console.log(event.target.value);
+    const helper = this.helperIsPublic(event.target.value);
+    console.log('helper ',helper);
+    this.setState({
+      [event.target.name]: event.target.value,
+    })
+    console.log(event.target.value);
+    
+  }
+
+  helperIsPublic = (is_Public) => {
+
+    console.log(is_Public)
+
+    return is_Public === 'true' ? true : false;
+  }
+
   handleSubmit = (event) => {
     event.preventDefault();
-    const { title, message, tag, is_Public, owner } = this.state;
+    const { title, message, tag, is_Public, owner, checked } = this.state;
     
     let arrayTag = []
     arrayTag.push(tag);
@@ -46,8 +88,9 @@ componentDidUpdate = (prevprops, state) => {
       title: title,
       message: message,
       tag: tag,
-      is_Public: is_Public,
-      owner
+      is_Public: is_Public,// === 'true' ? true : false, //this.helperIsPublic(is_Public),
+      owner,
+      checked
     })
     .then(() => {
       console.log('ha llegado a Edit: handleSubmit')
@@ -55,7 +98,7 @@ componentDidUpdate = (prevprops, state) => {
         title: '',
         message: '',
         tag: '',
-        is_Public: 'false',
+        is_Public: false,
       })
     })
   }
@@ -65,8 +108,17 @@ componentDidUpdate = (prevprops, state) => {
     if (this.props.user._id === this.props.speech.owner){
       equal = true;
     } 
-    const {title,tag, message, is_Public} = this.state;
-    console.log(is_Public);
+    const {title,tag, message} = this.state;
+    let {is_Public, checked} = this.state;
+    
+    const { selectedIndex } = this.state;
+
+    // if (is_Public === false){
+      
+    //   checked = !checked;
+    //   is_Public = !is_Public;
+    // }
+    // console.log(checked);
     return (
       <div>
         <form  onSubmit={this.handleSubmit}>
@@ -74,10 +126,40 @@ componentDidUpdate = (prevprops, state) => {
           <div>Message: <textarea name="message"  disabled={!equal} placeholder="message" value={message} onChange={this.handleInput}></textarea></div>
           <div>Tag: <input type="text"  disabled={!equal} name="tag" placeholder="tag" value={tag} onChange={this.handleInput}></input></div>
           
-          <div className="radio">Public:
-            <input type="radio" id="is_Public" name="is_Public" value="true" required onClick={this.handleInput}/></div>
-          <div className="radio">Private:
-            <input type="radio" id="is_not_Public" name="is_Public" value="false" onClick={this.handleInput}/></div>
+          { is_Public ? <div>
+            <div className="radio">Public: 
+              <input 
+                type="radio"  
+                value={true}
+                name="is_Public" 
+                required 
+                checked={true}
+                onChange={this.handleRadioButton} /></div>
+            <div className="radio">Private:
+              <input 
+                type="radio" 
+                value={false}
+                name="is_Public"
+                checked={false}   
+                onChange={this.handleRadioButton} /></div> </div>:
+               <div> <div className="radio">Public: 
+              <input 
+                type="radio" 
+                value={true} 
+                name="is_Public"  
+                required 
+                checked={false}
+                onChange={this.handleRadioButton} /></div>
+            <div className="radio">Private:
+              <input 
+                type="radio"  
+                value={false} 
+                name="is_Public"  
+                checked={true}
+                onChange={this.handleRadioButton} /></div> </div>
+                    
+          }
+
           { equal ? <div><input type="submit" value="Save speech" /></div> : <div></div> }
           
         </form>
