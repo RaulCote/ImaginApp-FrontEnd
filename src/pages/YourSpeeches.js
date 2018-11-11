@@ -35,6 +35,23 @@ class YourSpeeches extends Component {
       })
   }
 
+  handleDelete = (id) => {
+
+  speechService.deleteMySpeechId(id) 
+    .then((result) => {
+      if (!result){
+        console.log('Error trying delete speech.', result);
+      }else{
+        console.log('Speech delete succesfully.', result);
+      }
+    })
+    .catch((error) => {
+      console.log('The speech does not exist.', error);
+    }) 
+  
+
+  }
+
   render() {
     const { speeches, isLoading } = this.state;
     let filterSpeeches = [];
@@ -45,6 +62,7 @@ class YourSpeeches extends Component {
           // if (speech.owner === this.props.user._id) {
             return <div key={index}>
             <div><Link key={speech._id} to={`/speeches/${speech._id}`}>{speech.title}</Link></div>
+            <button onClick={() => this.handleDelete(speech._id)}>Delete</button>
             </div>
             // }
         } )}
