@@ -39,6 +39,11 @@ class SpeechService {
       .then(({ data }) => data )
   }
 
+  deleteMySpeechId(id) {
+    return this.speechService.delete(`/speeches/${id}`)
+      .then(({ data }) => data )
+  }
+
 }
 
 const speechService = new SpeechService();
