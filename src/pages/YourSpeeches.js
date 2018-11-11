@@ -42,6 +42,7 @@ class YourSpeeches extends Component {
       if (!result){
         console.log('Error trying delete speech.', result);
       }else{
+        this.props.history.push('/speeches')
         console.log('Speech delete succesfully.', result);
       }
     })
