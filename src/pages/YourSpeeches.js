@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import speechService from '../lib/speech-service'; 
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import queryString from 'query-string';
 import { withAuth } from '../lib/authContext';
 
@@ -11,14 +11,14 @@ class YourSpeeches extends Component {
     speeches: [],
     isLoading: true,
   }
-
+  
   componentDidMount() {
     this.renderUpdate();
   }
 
   renderUpdate = () => {
-    const valueSearch = queryString.parse(this.props.location.search);
-    const valueSearch2 = this.props.location.search;//queryString.stringify(valueSearch);
+    // const valueSearch = queryString.parse(this.props.location.search);
+    // const valueSearch2 = this.props.location.search;//queryString.stringify(valueSearch);
 
     this.setState({
       isLoading: true,
@@ -44,6 +44,8 @@ class YourSpeeches extends Component {
       }else{
         this.props.history.push('/speeches')
         console.log('Speech delete succesfully.', result);
+        this.renderUpdate();
+        // this.props.history.push('/profile/speeches');
       }
     })
     .catch((error) => {
@@ -74,4 +76,4 @@ class YourSpeeches extends Component {
 }
 
 
-export default withAuth(YourSpeeches);
+export default withRouter(withAuth(YourSpeeches));

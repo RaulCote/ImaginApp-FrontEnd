@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import {withRouter} from 'react-router-dom';
 import { withAuth } from '../lib/authContext';
 import speechService from '../lib/speech-service';
+
 
 
 class FormAdd extends Component {
@@ -10,6 +12,7 @@ class FormAdd extends Component {
     tag: '',
     is_Public: 'false',
     owner: this.props.user._id,
+    isLoading: true
   }
 
 
@@ -48,6 +51,10 @@ componentDidUpdate = (prevprops, state) => {
         tag: '',
         is_Public: 'false',
       })
+      this.setState({
+        isLoading: false,
+      })
+      this.props.history.push('/profile/speeches');
     })
   }
     
@@ -72,4 +79,4 @@ componentDidUpdate = (prevprops, state) => {
   }
 }
 
-export default  withAuth(FormAdd);
+export default  withRouter(withAuth(FormAdd));

@@ -65,12 +65,12 @@ componentDidUpdate = (prevprops, state) => {
     if (this.props.user._id === this.props.speech.owner){
       equal = true;
     } 
-    const {title,tag} = this.state;
+    const {title,tag, message} = this.state;
     return (
       <div>
         <form  onSubmit={this.handleSubmit}>
           <div>Title: <input type="text" disabled={!equal} name="title" placeholder="title" value={title} onChange={this.handleInput}></input></div>
-          <div>Message: <textarea name="message"  disabled={!equal} placeholder="message" onChange={this.handleInput}></textarea></div>
+          <div>Message: <textarea name="message"  disabled={!equal} placeholder="message" value={message} onChange={this.handleInput}></textarea></div>
           <div>Tag: <input type="text"  disabled={!equal} name="tag" placeholder="tag" value={tag} onChange={this.handleInput}></input></div>
           
           <div className="radio">Public:
