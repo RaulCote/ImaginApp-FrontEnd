@@ -12,15 +12,18 @@ import CreateSpeeches from './pages/CreateSpeeches';
 import YourSpeeches from './pages/YourSpeeches';
 import SpeechDetail from './pages/SpeechDetail';
 import Profile from './pages/Profile';
-
+import Favourites from './pages/Favourites';
+import Menu from './components/Menu';
+import Homepage from './pages/Homepage';
 
 class App extends Component {
   render() {
     return (
       <AuthContext>
-        <div className="container">
-          <div>
+        {/* <div className="container">
+          <div> */}
             <Navbar  />
+            {/* <Homepage /> */}
             <Switch>
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />   
@@ -29,10 +32,12 @@ class App extends Component {
               <Route exact path="/profile/speeches/new" component={CreateSpeeches} />    
               <Route exact path="/speeches/:id" component={SpeechDetail} />   
               <Route exact path="/profile" component={Profile} />
+              <Route exact path="/profile/favourites" component={Favourites} />
               <PrivateRoute path="/private" component={Private} />
             </Switch>
-          </div>
-        </div>
+            <Menu /> 
+          {/* </div>
+        </div> */}
       </AuthContext>
     )
   }

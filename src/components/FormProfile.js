@@ -63,14 +63,14 @@ class FormProfile extends Component {
   render() {
     const {username, email, picture} = this.state;
     return (
-      <div>
+      <React.Fragment>
         <form  onSubmit={this.handleSubmit}>
-          <div>Username: <input type="text" name="username" placeholder="username" value={username} onChange={this.handleInput}></input></div>
-          <div>Email: <input type="email" name="email" placeholder="email" value={email} onChange={this.handleInput}></input></div>
-          <div>Picture: <input type="text" name="picture" placeholder="picture" value={picture} onChange={this.handleInput}></input></div>
-          <div><input type="submit" value="Save Profile" /></div>         
+          <div>Username: <input className="form-input" type="text" name="username" placeholder="username" value={username} onChange={this.handleInput}></input></div>
+          <div>Email: <input className="form-input" type="email" name="email" placeholder="email" value={email} onChange={this.handleInput}></input></div>
+          <div>Picture: <input className="form-input" type="text" name="picture" placeholder="picture" value={picture} onChange={this.handleInput}></input></div>
+          <div class="submit-button-container"><button className="material-button btn-size-input" type="submit" value="Save Profile" >Save</button></div>         
         </form>   
-      </div>
+      </React.Fragment>
     )
   }
 }
