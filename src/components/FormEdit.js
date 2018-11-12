@@ -25,22 +25,22 @@ class FormEdit extends Component {
     console.log('Is public peta', this.props.speech.is_Public)
   }
 
-  static componentWillReceiveProps(nextProps) {
-    if (nextProps.is_Public !== this.props.is_Public) {
-        return {is_Public: nextProps.is_Public}
-    }else{
-       return null;     
-    }
-  }
+  // static getDerivedStateFromProps(nextProps,prevState) {
+  //   if (nextProps.is_Public !== prevState.is_Public) {
+  //       return {is_Public: nextProps.is_Public}
+  //   }else{
+  //      return null;     
+  //   }
+  // }
 
-  componentDidUpdate(prevProps, prevState) {
-    if(prevProps.is_Public!==this.props.is_Public){
-      //Perform some operation here
-      this.setState({is_Public: prevProps.is_Public});
-      this.classMethod();
-    }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if(prevProps.is_Public!==this.props.is_Public){
+  //     //Perform some operation here
+  //     this.setState({is_Public: this.props.is_Public});
+  //     this.classMethod();
+  //   }
 
-    }
+  //   }
    
    //https://hackernoon.com/replacing-componentwillreceiveprops-with-getderivedstatefromprops-c3956f7ce607
 
@@ -61,13 +61,15 @@ class FormEdit extends Component {
   }
 
   handleRadioButton = (event) => {
-    console.log(event.target.value);
+    const {is_Public} = this.state;
+    console.log('tipo public', typeof is_Public);
     const helper = this.helperIsPublic(event.target.value);
+    // console.log('tipo de helper' ,typeof helper);
     console.log('helper ',helper);
     this.setState({
-      [event.target.name]: event.target.value,
+      is_Public: helper,
     })
-    console.log(event.target.value);
+    console.log('despues', is_Public);
     
   }
 
@@ -81,7 +83,9 @@ class FormEdit extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const { title, message, tag, is_Public, owner, checked } = this.state;
-    
+    console.log('tipo id', typeof this.props.speech._id);
+
+
     let arrayTag = []
     arrayTag.push(tag);
       speechService.getEditSpeechId(this.props.speech._id,{

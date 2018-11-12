@@ -5,17 +5,17 @@ import profileService from '../lib/profile-service';
 
 class FormProfile extends Component {
   state = {
-    username: this.props.user.username,
-    email: this.props.user.email,
-    picture: this.props.user.picture,
+    username: '',
+    email: '',
+    picture: '',
   }
   
 
   componentDidMount(){
       this.setState({
-        username: this.props.user.username,
-        email: this.props.user.email,
-        picture: this.props.user.picture,
+        username: this.props.editUser.username,
+        email: this.props.editUser.email,
+        picture: this.props.editUser.picture,
     })
   }
 
@@ -28,7 +28,7 @@ class FormProfile extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const { username, email, picture } = this.state;
-      profileService.getEditProfile(this.props.user._id,{
+      profileService.getEditProfile(this.props.editUser._id,{
       username: username,
       email: email,
       picture: picture,
