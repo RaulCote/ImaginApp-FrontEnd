@@ -3,6 +3,7 @@ import speechService from '../lib/speech-service';
 import { withAuth } from '../lib/authContext';
 import FormEdit from '../components/FormEdit';
 
+
 class SpeechDetail extends Component {
 
 state = {
@@ -33,6 +34,7 @@ renderUpdate = () => {
   render() {
     const { speech, isLoading } = this.state;
     console.log(this.props.location);
+    
     return (
       <div>
         {isLoading ? <h1>Loading</h1> : <div><FormEdit speech={speech}/><h1>{speech.title}</h1>

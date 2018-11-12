@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { withAuth } from '../lib/authContext';
 import speechService from '../lib/speech-service';
+import SpeechRecognition from 'react-speech-recognition';
+
 
 
 class FormEdit extends Component {
@@ -54,6 +56,13 @@ class FormEdit extends Component {
 // }
 
 
+  handleInputTexarea = (event,transcript) => {
+    console.log(transcript);
+    this.setState({
+      [event.target.name]: event.target.value.concat(transcript),
+    })
+  }
+
   handleInput = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
@@ -62,20 +71,20 @@ class FormEdit extends Component {
 
   handleRadioButton = (event) => {
     const {is_Public} = this.state;
-    console.log('tipo public', typeof is_Public);
+    // console.log('tipo public', typeof is_Public);
     const helper = this.helperIsPublic(event.target.value);
     // console.log('tipo de helper' ,typeof helper);
-    console.log('helper ',helper);
+    // console.log('helper ',helper);
     this.setState({
       is_Public: helper,
     })
-    console.log('despues', is_Public);
+    // console.log('despues', is_Public);
     
   }
 
   helperIsPublic = (is_Public) => {
 
-    console.log(is_Public)
+    // console.log(is_Public)
 
     return is_Public === 'true' ? true : false;
   }
@@ -83,7 +92,7 @@ class FormEdit extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const { title, message, tag, is_Public, owner, checked } = this.state;
-    console.log('tipo id', typeof this.props.speech._id);
+    // console.log('tipo id', typeof this.props.speech._id);
 
 
     let arrayTag = []
@@ -115,19 +124,19 @@ class FormEdit extends Component {
     const {title,tag, message} = this.state;
     let {is_Public, checked} = this.state;
     
-    const { selectedIndex } = this.state;
+    const { transcript, resetTranscript, browserSupportsSpeechRecognition, startListening, stopListening,recognition } = this.props
+    recognition.lang = 'es-ES';
+    
 
-    // if (is_Public === false){
-      
-    //   checked = !checked;
-    //   is_Public = !is_Public;
-    // }
-    // console.log(checked);
+    if (!browserSupportsSpeechRecognition) {
+      return null
+    }
+
     return (
       <div>
         <form  onSubmit={this.handleSubmit}>
           <div>Title: <input type="text" disabled={!equal} name="title" placeholder="title" value={title} onChange={this.handleInput}></input></div>
-          <div>Message: <textarea name="message"  disabled={!equal} placeholder="message" value={message} onChange={this.handleInput}></textarea></div>
+          <div>Message: <textarea rows="10" cols="80" name="message"  disabled={!equal} placeholder="message" value={message} onChange={() => this.handleInputTexarea(transcript)}></textarea></div>
           <div>Tag: <input type="text"  disabled={!equal} name="tag" placeholder="tag" value={tag} onChange={this.handleInput}></input></div>
           
           { is_Public ? <div>
@@ -145,7 +154,8 @@ class FormEdit extends Component {
                 value={false}
                 name="is_Public"
                 checked={false}   
-                onChange={this.handleRadioButton} /></div> </div>:
+                onChange={this.handleRadioButton} /></div> 
+            </div>:
                <div> <div className="radio">Public: 
               <input 
                 type="radio" 
@@ -160,17 +170,31 @@ class FormEdit extends Component {
                 value={false} 
                 name="is_Public"  
                 checked={true}
-                onChange={this.handleRadioButton} /></div> </div>
-                    
-          }
+                onChange={this.handleRadioButton} /></div> 
+            
+              </div>
+            } 
 
-          { equal ? <div><input type="submit" value="Save speech" /></div> : <div></div> }
+          { equal ? <div><input type="submit" value="Save speech" /></div> : <React.Fragment></React.Fragment> }
           
         </form>
-        
+
+        { equal ?    <div>  
+              <button onClick={startListening}>Start</button>
+              <button onClick={stopListening}>Stop</button>
+              <button onClick={resetTranscript}>Reset</button>
+              <span>{transcript}</span>
+              
+            </div>: <React.Fragment></React.Fragment>
+        }
       </div>
     )
   }
 }
 
-export default  withAuth(FormEdit);
+const options = {
+  autoStart: false,
+  
+}
+
+export default  SpeechRecognition(options)(withAuth(FormEdit));
