@@ -8,11 +8,11 @@ class ProfileService {
     })
   } 
 
-  // getProfile(id) {
-  //   console.log('id', id)
-  //   return this.profileService.get(`/profile/${id}`)
-  //     .then (( { data } ) => data )
-  // }
+  getProfile() {
+    return this.profileService.get('/profile')
+      .then (( { data } ) => data )
+  }
+
   getEditProfile(body) {
     return this.profileService.put('/profile', body)
       .then (( { data } ) => data )
