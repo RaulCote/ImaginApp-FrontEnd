@@ -6,38 +6,13 @@ import FormProfile from '../components/FormProfile';
 
 class Profile extends Component {
   
-  state = {
-    user: '',
-  }
-  
-  componentDidMount() {
-    this.renderUpdate();
-  }
-  
-  renderUpdate = () => {
-  // const id = this.props.user._id;
-  const id  = this.props.match.params.id;
-  console.log('tipo id ', id)
-
-
-  profileService.getProfile(id)
-    .then(result => {
-      console.log('user2 ', result)
-      this.setState({
-        user: result,
-      })
-    })
-    .catch(error => {
-      console.log('Error user', error)
-    })
-  }
 
   render() {
-    const {user} = this.state;
+  
     return (
       <div>
         <h1>My Profile.</h1>
-        <div><FormProfile editUser={user} />
+        <div><FormProfile  />
         {/* <div><FormProfile user2={user} /> */}
           <h1>{this.props.user.username}</h1>
         </div> 
