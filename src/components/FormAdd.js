@@ -120,7 +120,7 @@ handleTextArea = (event) => {
         <div>
           <form onSubmit={this.handleSubmit}>
             <div>Title: <input type="text" name="title" placeholder="title" onChange={this.handleInput}></input></div>
-            <div>Message: <textarea rows="10" cols="80" name="message" placeholder="message" value={message} onChange={this.handleInput}></textarea></div>
+            <div>Message: <textarea className="text-area-form" rows="20" cols="43" name="message" placeholder="message" value={message} onChange={this.handleInput}></textarea></div>
             <div>Tag: <input type="text" name="tag" placeholder="tag" onChange={this.handleInput}></input></div>
             
             <div className="radio">Public:
@@ -143,7 +143,7 @@ handleTextArea = (event) => {
              <span>{transcript}</span>
           <form onSubmit={this.handleSubmit}>
             <div>Title: <input type="text" name="title" placeholder="title" onChange={this.handleInput}></input></div>
-            <div>Message: <textarea rows="10" cols="80" name="message" placeholder="message" value={transcript} onFocus={this.handleTextArea} onChange={this.handleTextArea}></textarea></div>
+            <div>Message: <textarea className="text-area-form" rows="20" cols="43" name="message" placeholder="message" value={transcript} onFocus={this.handleTextArea} onChange={this.handleTextArea}></textarea></div>
             <div>Tag: <input type="text" name="tag" placeholder="tag" onChange={this.handleInput}></input></div>
             
             <div className="radio">Public:

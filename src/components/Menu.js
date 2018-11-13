@@ -8,12 +8,37 @@ class Menu extends Component {
       <div>
         {isLogged ? <React.Fragment>
       <div className="menu-navbar">
-          <button className="material-button mat-pad1 btn-size-nav"><Link to='/profile'><div className='material-buttons-text'><img className="img-navbar"src={process.env.PUBLIC_URL + '/images/persona-blanca.png'} alt='arroba'/>Profile</div></Link></button>
-          <button className="material-button mat-pad2 btn-size-nav"><Link to='/speeches'><div className='material-buttons-text'><img className="img-navbar" src={process.env.PUBLIC_URL + '/images/arroba-blanca.png'} alt='arroba'/>Explore</div></Link></button>
-          <button className="material-button mat-pad3 btn-size-nav"><Link to='/profile/speeches'><div className='material-buttons-text'><img className="img-navbar" src={process.env.PUBLIC_URL + '/images/discurso-blanco.png'} alt='arroba'/>Yours</div></Link></button>
-          <button className="material-button mat-pad4 btn-size-nav"><Link to='/profile/favourites'><div className='material-buttons-text'><img className="img-navbar" src={process.env.PUBLIC_URL + '/images/estrella-blanca.png'} alt='arroba'/>Fav</div></Link></button>
-          <button className="material-button mat-pad5 btn-size-nav"><Link to='/profile/speeches/new'><div className='material-buttons-text'><img className="img-navbar" src={process.env.PUBLIC_URL + '/images/voz-grabar-blanco.png'} alt='arroba'/>New</div></Link></button>
+        <Link to='/profile' className="material-button btn-size-nav">
+          <div className='material-buttons-container'>
+            <div><img className="img-navbar" src={process.env.PUBLIC_URL + '/images/persona-blanca.png'} alt='arroba'/></div>
+            <p class="mtn-text1">Profile</p>
           </div>
+        </Link>
+        <Link to='/speeches' className="material-button btn-size-nav">
+          <div className='material-buttons-container'>
+            <div><img className="img-navbar" src={process.env.PUBLIC_URL + '/images/arroba-blanca.png'} alt='arroba'/></div>
+            <p class="mtn-text2">Explore</p>
+          </div>
+        </Link>
+        <Link to='/profile/speeches' className="material-button btn-size-nav">
+          <div className='material-buttons-container'>
+            <div><img className="img-navbar" src={process.env.PUBLIC_URL + '/images/discurso-blanco.png'} alt='arroba'/></div>
+            <p class="mtn-text3">Yours</p>
+          </div>
+        </Link>
+        <Link to='/profile/favourites' className="material-button btn-size-nav">
+          <div className='material-buttons-container'>
+            <div><img className="img-navbar" src={process.env.PUBLIC_URL + '/images/estrella-blanca.png'} alt='arroba'/></div>
+            <p class="mtn-text4">Fav</p>
+          </div>
+        </Link>
+        <Link to='/profile/speeches/new' className="material-button btn-size-nav">
+          <div className='material-buttons-container'>
+            <div><img className="img-navbar" src={process.env.PUBLIC_URL + '/images/voz-grabar-blanco.png'} alt='arroba'/></div>
+            <p  class="mtn-text5">New</p>
+          </div>
+        </Link>
+      </div>
           </React.Fragment> : <div></div>
         }
       </div>
