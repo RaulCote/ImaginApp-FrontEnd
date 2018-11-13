@@ -4,14 +4,11 @@ import { withAuth } from '../lib/authContext';
 
 class Homepage extends Component {
   render() {
-    const { isLogged } = this.props;
     return (
       <div>
-        {!isLogged ? <div className="homepage"><h1>Imagin</h1>
-        <Link to='/login'>Login</Link>
-        <Link to='/signup'>Signup</Link>
-      </div> : <div></div>
-      }
+        <div><img className="homepage-logo" src={process.env.PUBLIC_URL + '/images/imagine-logo-verde.png'} alt="imagine logo" /></div>
+        {/* <Link to='/login'>Login</Link>
+        <Link to='/signup'>Signup</Link> */}
       </div>
     )
   }

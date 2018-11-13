@@ -25,8 +25,9 @@ class App extends Component {
             <Navbar  />
             {/* <Homepage /> */}
             <Switch>
-              <Route path="/signup" component={Signup} />
-              <Route path="/login" component={Login} />   
+              <Route exact path="/" component={Homepage} />
+              <Route exact path="/signup" component={Signup} />
+              <Route exact path="/login" component={Login} />   
               <Route exact path="/speeches" component={WorldSpeeches} /> 
               <Route exact path="/profile/speeches" component={YourSpeeches} />
               <Route exact path="/profile/speeches/new" component={CreateSpeeches} />    
