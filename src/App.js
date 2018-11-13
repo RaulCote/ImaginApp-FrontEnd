@@ -28,12 +28,12 @@ class App extends Component {
               <Route exact path="/" component={Homepage} />
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/login" component={Login} />   
-              <Route exact path="/speeches" component={WorldSpeeches} /> 
-              <Route exact path="/profile/speeches" component={YourSpeeches} />
-              <Route exact path="/profile/speeches/new" component={CreateSpeeches} />    
-              <Route exact path="/speeches/:id" component={SpeechDetail} />   
-              <Route exact path="/profile" component={Profile} />
-              <Route exact path="/profile/favourites" component={Favourites} />
+              <PrivateRoute exact path="/speeches" component={WorldSpeeches} /> 
+              <PrivateRoute exact path="/profile/speeches" component={YourSpeeches} />
+              <PrivateRoute exact path="/profile/speeches/new" component={CreateSpeeches} />    
+              <PrivateRoute exact path="/speeches/:id" component={SpeechDetail} />   
+              <PrivateRoute exact path="/profile" component={Profile} />
+              <PrivateRoute exact path="/profile/favourites" component={Favourites} />
               <PrivateRoute path="/private" component={Private} />
             </Switch>
             <Menu /> 
