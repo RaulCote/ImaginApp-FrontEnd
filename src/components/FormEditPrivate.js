@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { withAuth } from '../lib/authContext';
 import speechService from '../lib/speech-service';
+import SpeechRecognition from 'react-speech-recognition';
 
 
 
-class FormEdit extends Component {
+class FormEditPrivate extends Component {
   state = {
     title: this.props.speech.title,
     message: this.props.speech.message,
@@ -23,7 +24,7 @@ class FormEdit extends Component {
       owner: this.props.user._id,
       checked: this.props.speech.is_Public,
     })
-    // console.log('Is public peta', this.props.speech.is_Public)
+    console.log('Is public peta', this.props.speech.is_Public)
   }
 
   // static getDerivedStateFromProps(nextProps,prevState) {
@@ -55,7 +56,12 @@ class FormEdit extends Component {
 // }
 
 
-
+  handleInputTexarea = (event,transcript) => {
+    console.log(transcript);
+    this.setState({
+      [event.target.name]: event.target.value.concat(transcript),
+    })
+  }
 
   handleInput = (event) => {
     this.setState({
@@ -116,7 +122,7 @@ class FormEdit extends Component {
       equal = true;
     } 
     const {title,tag, message} = this.state;
-    let {is_Public} = this.state;
+    let {is_Public, checked} = this.state;
     
 
     return (
@@ -128,42 +134,9 @@ class FormEdit extends Component {
           <div>Message: <textarea rows="10" cols="80" name="message"  disabled={!equal} placeholder="message" value={message} onChange={this.handleInput}></textarea></div>
           <div>Tag: <input type="text"  disabled={!equal} name="tag" placeholder="tag" value={tag} onChange={this.handleInput}></input></div>
           
-          { is_Public ? <div>
-            <div className="radio">Public: 
-              <input 
-                type="radio"  
-                value={true}
-                name="is_Public" 
-                required 
-                checked={true}
-                onChange={this.handleRadioButton} /></div>
-            <div className="radio">Private:
-              <input 
-                type="radio" 
-                value={false}
-                name="is_Public"
-                checked={false}   
-                onChange={this.handleRadioButton} /></div> 
-            </div>:
-               <div> <div className="radio">Public: 
-              <input 
-                type="radio" 
-                value={true} 
-                name="is_Public"  
-                required 
-                checked={false}
-                onChange={this.handleRadioButton} /></div>
-            <div className="radio">Private:
-              <input 
-                type="radio"  
-                value={false} 
-                name="is_Public"  
-                checked={true}
-                onChange={this.handleRadioButton} /></div> 
-            
-              </div>
-            } 
-          { equal ? <div><input type="submit" value="Save speech" /></div>: <React.Fragment> </React.Fragment>}
+        
+               
+          
         </form>
   </div>
        
@@ -172,4 +145,4 @@ class FormEdit extends Component {
 }
 
 
-export default  withAuth(FormEdit);
+export default  withAuth(FormEditPrivate);
