@@ -134,9 +134,14 @@ class FormEdit extends Component {
 
     return (
       <div>
-        <form  onSubmit={this.handleSubmit}>
+        { equal ? <div>
+          <button onClick={this.handleActivateAudio}>Use Audio</button>
+          <button onClick={this.handleActivateText}>Use Text</button></div>
+        : <React.Fragment></React.Fragment> }     
+        
+        <form onSubmit={this.handleSubmit}>
           <div>Title: <input type="text" disabled={!equal} name="title" placeholder="title" value={title} onChange={this.handleInput}></input></div>
-          <div>Message: <textarea rows="10" cols="80" name="message"  disabled={!equal} placeholder="message" value={message} onChange={() => this.handleInputTexarea(transcript)}></textarea></div>
+          <div>Message: <textarea rows="10" cols="80" name="message"  disabled={!equal} placeholder="message" value={message}></textarea></div>
           <div>Tag: <input type="text"  disabled={!equal} name="tag" placeholder="tag" value={tag} onChange={this.handleInput}></input></div>
           
           { is_Public ? <div>
