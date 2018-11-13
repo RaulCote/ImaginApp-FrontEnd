@@ -7,6 +7,7 @@ class FormProfile extends Component {
     username: '',
     email: '',
     picture: '',
+    alert: ''
   }
 
   // componentDidMount(){
@@ -56,12 +57,22 @@ class FormProfile extends Component {
         username: result.username,
         email: result.email,
         picture: result.picture,
+        alert: ''
       })
+    })
+    .catch( error => {
+      const { data } = error.response;
+
+      if (data.error === 'Fields cannot be empty') {
+        this.setState({
+          alert: 'Fields cannot be empty'
+        })
+      }
     })
   }
     
   render() {
-    const {username, email, picture} = this.state;
+    const {username, email, picture, alert } = this.state;
     return (
       <React.Fragment>
         <form  onSubmit={this.handleSubmit}>
@@ -70,6 +81,7 @@ class FormProfile extends Component {
           <div>Picture: <input className="form-input" type="text" name="picture" placeholder="picture" value={picture} onChange={this.handleInput}></input></div>
           <div class="submit-button-container"><button className="material-button btn-size-input" type="submit" value="Save Profile" >Save</button></div>         
         </form>   
+        { alert ? <h1>{alert}</h1> : <div></div>}
       </React.Fragment>
     )
   }

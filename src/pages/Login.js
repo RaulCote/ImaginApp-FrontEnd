@@ -5,6 +5,7 @@ class Login extends Component {
   state = {
     username: "",
     password: "",
+    alert: "",
   }
 
   handleFormSubmit = (event) => {
@@ -16,7 +17,30 @@ class Login extends Component {
       this.props.setUser(user)
       this.props.history.push('/private'); 
     })
-    .catch( error => console.log(error) )
+    .catch( error => {
+      const { data } = error.response;
+      switch(data.error){
+        case 'User or password invalid':
+          this.setState({
+            alert: 'invalid username'
+          });
+          break;
+        case 'not-found':
+          this.setState({
+            alert: 'User or password invalid.'
+          });
+          break;
+        case 'validation':
+          this.setState({
+            alert: 'Username or password can´t be empty.'
+          });
+          break;
+        default:
+          this.setState({
+            alert: ''
+          })
+      }   
+    })
   }
 
   handleChange = (event) => {  
@@ -25,15 +49,18 @@ class Login extends Component {
   }
 
   render() {
-    const { username, password } = this.state;
+    const { username, password, alert } = this.state;
     return (
-      <form onSubmit={this.handleFormSubmit}>
-        <label>Username:</label>
-        <input type="text" name="username" value={username} onChange={this.handleChange}/>
-        <label>Password:</label>
-        <input type="password" name="password" value={password} onChange={this.handleChange} />
-        <input type="submit" value="Login" />
-      </form>
+      <React.Fragment>
+        <form onSubmit={this.handleFormSubmit}>
+          <label>Username:</label>
+          <input type="text" name="username" value={username} onChange={this.handleChange}/>
+          <label>Password:</label>
+          <input type="password" name="password" value={password} onChange={this.handleChange} />
+          <input type="submit" value="Login" />
+        </form>
+        { alert ? <h1>{alert}</h1> : <div></div>}
+      </React.Fragment>
     )
   }
 }

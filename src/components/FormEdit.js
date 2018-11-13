@@ -12,6 +12,7 @@ class FormEdit extends Component {
     is_Public: this.props.speech.is_Public,
     owner: this.props.user._id,
     checked: !(this.props.speech.is_Public),
+    alert: ''
   }
 
   componentDidMount(){
@@ -23,39 +24,7 @@ class FormEdit extends Component {
       owner: this.props.user._id,
       checked: this.props.speech.is_Public,
     })
-    // console.log('Is public peta', this.props.speech.is_Public)
   }
-
-  // static getDerivedStateFromProps(nextProps,prevState) {
-  //   if (nextProps.is_Public !== prevState.is_Public) {
-  //       return {is_Public: nextProps.is_Public}
-  //   }else{
-  //      return null;     
-  //   }
-  // }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   if(prevProps.is_Public!==this.props.is_Public){
-  //     //Perform some operation here
-  //     this.setState({is_Public: this.props.is_Public});
-  //     this.classMethod();
-  //   }
-
-  //   }
-   
-   //https://hackernoon.com/replacing-componentwillreceiveprops-with-getderivedstatefromprops-c3956f7ce607
-
-//   componentDidUpdate = (prevprops, state) => {
-//   if (this.props.is_Public !== prevprops.is_Public){
-//     this.setState({
-//       is_Public: this.props.is_Public,
-//       checked: this.props.is_Public
-//     })
-//   }
-// }
-
-
-
 
   handleInput = (event) => {
     this.setState({
@@ -72,7 +41,7 @@ class FormEdit extends Component {
     this.setState({
       is_Public: helper,
     })
-    // console.log('despues', is_Public);
+
     
   }
 
@@ -106,7 +75,17 @@ class FormEdit extends Component {
         message: '',
         tag: '',
         is_Public: false,
+        alert: ''
       })
+    })
+    .catch( error => {
+      const { data } = error.response;
+
+      if (data.error === 'Fields cannot be empty') {
+        this.setState({
+          alert: 'Fields cannot be empty'
+        })
+      }
     })
   }
     
@@ -115,14 +94,13 @@ class FormEdit extends Component {
     if (this.props.user._id === this.props.speech.owner){
       equal = true;
     } 
-    const {title,tag, message} = this.state;
+    const {title,tag, message, alert} = this.state;
     let {is_Public} = this.state;
     
 
     return (
-      <div>
-         
-        
+      <div>      
+         { alert ? <h1>{alert}</h1> : <div></div>}
         <form onSubmit={this.handleSubmit}>
           <div>Title: <input type="text" disabled={!equal} name="title" placeholder="title" value={title} onChange={this.handleInput}></input></div>
           <div>Message: <textarea className="text-area-form" rows="10" cols="43" name="message"  disabled={!equal} placeholder="message" value={message} onChange={this.handleInput}></textarea></div>

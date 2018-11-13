@@ -5,10 +5,6 @@ import speechService from '../lib/speech-service';
 import SpeechRecognition from 'react-speech-recognition';
 import SpeechAPI from '../components/SpeechAPI';
 
-
-
-
-
 class FormAdd extends Component {
   state = {
     title: '',
@@ -21,9 +17,9 @@ class FormAdd extends Component {
     is_Audio: false,
     my_transcript: '',
     btn_Start: false,
-    btn_Stop: true
-
-  }
+    btn_Stop: true,
+    alert: ''
+}
 
 componentDidUpdate = (prevprops, state) => {
   if (this.props.id !== prevprops.id){
@@ -73,11 +69,21 @@ handleTextArea = (event) => {
         message: '',
         tag: '',
         is_Public: 'false',
+        alert: ''
       })
       this.setState({
         isLoading: false,
       })
       this.props.history.push('/profile/speeches');
+    })
+    .catch( error => {
+      const { data } = error.response;
+
+      if (data.error === 'Fields cannot be empty') {
+        this.setState({
+          alert: 'Fields cannot be empty'
+        })
+      }
     })
   }
 
@@ -101,7 +107,7 @@ handleTextArea = (event) => {
  }
     
   render() {
-    const {message, is_Text, is_Audio, btn_Start} = this.state;
+    const {message, is_Text, is_Audio, btn_Start, alert} = this.state;
     let { finalTranscript, transcript, resetTranscript, browserSupportsSpeechRecognition, startListening, stopListening,recognition } = this.props
     
     recognition.lang = 'es-ES';
@@ -115,6 +121,7 @@ handleTextArea = (event) => {
       <div>
         <button onClick={this.handleActivateAudio}>Use Audio</button>
         <button onClick={this.handleActivateText}>Use Text</button>
+        { alert ? <h1>{alert}</h1> : <div></div>}
 
         {is_Text ? 
         <div>
