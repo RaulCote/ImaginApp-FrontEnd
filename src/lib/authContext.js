@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import authService from './auth-service';
+import profileService from '../lib/profile-service';
 
 const { Provider, Consumer } = React.createContext();
 
@@ -24,17 +25,29 @@ export default class AuthContext extends Component {
   componentDidMount() {
     authService.me()
     .then((user)=>{
-      this.setState({
-        user,
-        isLoading : false,
-        isLogged : true
-      })
+      this.renderUpdate();
+      // this.setState({
+      //   user,
+      //   isLoading : false,
+      //   isLogged : true
+      // })
     })
     .catch((error)=>{
       this.setState({
         isLogged : false,
         user : null,
         isLoading : false
+      })
+    })
+  }
+
+  renderUpdate = () => {
+    profileService.getProfile()
+    .then(result => {
+      this.setState({
+        user: result,
+        isLogged : true,
+        isLoading : false,
       })
     })
   }

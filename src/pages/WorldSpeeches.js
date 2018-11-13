@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import speechService from '../lib/speech-service'; 
 import { Link } from 'react-router-dom';
 import queryString from 'query-string';
+import { withAuth } from '../lib/authContext';
+
 // const queryString = require('query-string');
 
 class WorldSpeeches extends Component {
@@ -75,8 +77,7 @@ class WorldSpeeches extends Component {
     return (
       <div>
         <h1>Speaches Search</h1>
-        Search: <input type="search" name="search" size="50" value={search} onChange={this.handleSearch}/>
-
+        Search: <input type="search" name="search" value={search} onChange={this.handleSearch}/>
         {isLoading ? <h2>Loading...</h2> : speechesSearch.map((speech, index) => {
           return <div index={index} key={speech.title}>
             <div><Link key={speech._id} to={`/speeches/${speech._id}`}>{speech.title}</Link></div>
@@ -87,4 +88,4 @@ class WorldSpeeches extends Component {
   }
 }
 
-export default WorldSpeeches;
+export default withAuth(WorldSpeeches);
