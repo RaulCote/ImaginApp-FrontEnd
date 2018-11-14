@@ -13,6 +13,7 @@ class WorldSpeeches extends Component {
     speechesSearch: [],
     isLoading: true,
     search:'',
+    alert: '',
     // values: queryString.parse(this.props.location.search),
   }
 
@@ -29,9 +30,7 @@ class WorldSpeeches extends Component {
       isLoading: true,
       values: valueSearch2,
     });
-    const values = this.state.values;
-    console.log('value ', valueSearch)
-    console.log('value2', valueSearch2)
+
     speechService.getSpeech()
       .then(result => {
         this.setState({
@@ -52,10 +51,9 @@ class WorldSpeeches extends Component {
     const result = speeches.filter((speech,index) => {
       let speechTitle = speech.title.toUpperCase();
       let speechTag = speech.tag[0].toUpperCase();
-      console.log(speechTag);
-        if (speechTitle.includes(event.target.value.toUpperCase()) || speechTag.includes(event.target.value.toUpperCase())){
+      let speechMessage = speech.message.toUpperCase();
+        if (speechTitle.includes(event.target.value.toUpperCase()) || speechTag.includes(event.target.value.toUpperCase()) || speechMessage.includes(event.target.value.toUpperCase())){
           speech.index= index;
-          // console.log(comida.index);
           return speech;    
         }
        
@@ -63,21 +61,39 @@ class WorldSpeeches extends Component {
     
     this.setState({
       search: event.target.value,
-      // speeches: result,
       speechesSearch: result,
-
     })
   }
 
   handleFavourites = (id) => {
     speechService.addFavsSpeech(id)
       .then((result) => {
-        console.log(result, 'Botón favoritos')
+        console.log('REsultado fav ',result)
+        this.setState({
+          alert: 'Speech add to favourites successfully'
+        })
+        // if (result){
+
+        // }
+      })
+      .catch( error => {
+        const { data } = error.response;
+        switch(data.error){
+          case 'already add to favourites':     // checked
+            this.setState({
+              alert: 'Speech already add to favourites'
+            });
+            break;
+          default:
+            this.setState({
+              alert: ''
+            })
+        }   
       })
   }
 
   render() {
-    const { speeches, isLoading, search, speechesSearch } = this.state;
+    const { speeches, isLoading, search, speechesSearch, alert } = this.state;
     // console.log(this.props.location);
     
 
@@ -87,11 +103,12 @@ class WorldSpeeches extends Component {
         <h1>Explore Speeches</h1>
         <div className="search-bar">Search: <input  className="form-input" type="search" name="search" value={search} onChange={this.handleSearch}/></div>
       </div>
+      { alert ? <h1>{alert}</h1> : <React.Fragment></React.Fragment>}
       <section className="search-result">
         {isLoading ? <h2>Loading...</h2> : speechesSearch.map((speech, index) => {
           return <div className="search-link-containers" index={index} key={speech.title}>
             <div className="search-flex">
-              <div><Link className="search-links" key={speech._id} to={`/speeches/${speech._id}`}>{speech.title}</Link></div>
+              <div><Link className="search-links" key={`${speech._id}-${index}`} to={`/speeches/${speech._id}`}>{speech.title}</Link></div>
               <div><button className="fav-button" onClick={() => this.handleFavourites(speech._id)}>Fav</button></div>
             </div>
           </div>

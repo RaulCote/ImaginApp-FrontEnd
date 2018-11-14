@@ -9,6 +9,7 @@ class YourSpeeches extends Component {
   state = {
     speeches: [],
     isLoading: true,
+    alert: ''
   }
   
   componentDidMount() {
@@ -21,37 +22,46 @@ class YourSpeeches extends Component {
     });
     speechService.getMySpeeches(this.props.user._id)
       .then(result => {
-        this.setState({
-          speeches: result,
-          isLoading: false,
-        })
+        if (result){
+          console.log('No hay mensajes', result)
+        }
+          this.setState({
+            speeches: result,
+            isLoading: false,
+            alert:''
+          })
+            
+        
       })
       .catch(error => {
-        console.log('Error renderList', error);
+          this.setState({
+            alert: 'Error showing speeches. Please try again.'
+          })
       })
   }
 
   handleDelete = (id) => {
+    // console.log('Antes de borrar nada iD: ', id);
     speechService.deleteMySpeechId(id) 
       .then((result) => {
-        if (!result){
-          console.log('Error trying delete speech.', result);
-        }else{
-          console.log('Speech delete succesfully.', result);
+        if (result){       
+          this.props.history.push('/profile/speeches')
+          this.renderUpdate();
         }
-        this.props.history.push('/speeches')
-        this.renderUpdate();
       })
       .catch((error) => {
-        console.log('The speech does not exist.', error);
+        this.setState({
+          alert: 'The speech does not exist. Please try again.'
+        })
       }) 
   }
 
   render() {
-    const { speeches, isLoading } = this.state;
+    const { speeches, isLoading, alert} = this.state;
     return (
       <div>
         <h1>Your Search</h1>
+        { alert ? <h1>{alert}</h1> : <React.Fragment></React.Fragment>}
         {isLoading ? <h2>Loading...</h2> : speeches.map((speech, index) => {
           // if (speech.owner === this.props.user._id) {
             return <div key={index}>
@@ -60,7 +70,8 @@ class YourSpeeches extends Component {
             </div>
             // }
         } )}
-        
+          
+
        </div>
     )
   }

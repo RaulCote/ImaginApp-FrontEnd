@@ -35,7 +35,6 @@ renderUpdate = () => {
         is_Public: result.is_Public,
         owner: result.owner
       })
-      console.log('public o no ', result.is_Public)
     })
     .catch( error => {
       const { data } = error.response;

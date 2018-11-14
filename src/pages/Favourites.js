@@ -7,6 +7,7 @@ class Favourites extends Component {
 
   state = {
     favourites: [],
+    alert: '',
   }
 
   componentDidMount() {
@@ -16,20 +17,29 @@ class Favourites extends Component {
   renderUpdate = () => {
     profileService.getFavourites(this.props.user._id)
       .then(result => {
-        console.log(result.favourites, 'nuevo result desde backend')
+        // console.log(result.favourites, 'nuevo result desde backend')
+        // console.log(result.message, 'Solo result.')
         this.setState({
           favourites: result.favourites,
+          alert: ''
         })
       })
       .catch(error => {
-        console.log('Error in favourites', error)
+        this.setState({
+          alert: 'Error showing favourites. Try again please.'
+        })
       })
   }
 
   handleDelete = (id) => {
     profileService.deleteFavourites(id)
       .then((result) => {
-        this.props.history.push('/profile/favourites')
+          this.setState({
+            alert: 'Speech deleted succesfully ',
+          })
+        
+        console.log('ha entrado despues de delete favourites')
+          this.props.history.push('/profile/favourites')
         this.renderUpdate();
       })
       .catch((error) => {
@@ -38,7 +48,7 @@ class Favourites extends Component {
   }
 
   render() {
-    const { favourites } = this.state;
+    const { favourites, alert } = this.state;
     return (
       <React.Fragment>
         <h1>Favourites</h1>
@@ -48,7 +58,10 @@ class Favourites extends Component {
               <button onClick={() => this.handleDelete(favourite._id)}>Delete from Favourites</button>
             </div>
           } )}
+               
+          { alert ? <h1>{alert}</h1> : <React.Fragment></React.Fragment>}
       </React.Fragment>
+      
     )
   }
 }

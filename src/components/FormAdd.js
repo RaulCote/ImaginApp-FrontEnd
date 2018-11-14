@@ -155,7 +155,7 @@ handleTextArea = (event) => {
         {is_Text ? 
         <div>
           <form onSubmit={this.handleSubmit}>
-            <div>Title: <input type="text" name="title" placeholder="title" onChange={this.handleInput}></input></div>
+            <div>Title: <input autoFocus id="title-text" type="text" name="title" placeholder="title" onChange={this.handleInput}></input></div>
             <div>Message: <textarea className="text-area-form" rows="20" cols="43" name="message" placeholder="message" value={message} onChange={this.handleInput}></textarea></div>
             <div>Tag: <input type="text" name="tag" placeholder="tag" onChange={this.handleInput}></input></div>
             
@@ -178,7 +178,7 @@ handleTextArea = (event) => {
              <button disabled={btn_Start} onClick={this.handleResetTranscript}>Reset</button>
              <span>{transcript}</span>
           <form onSubmit={this.handleSubmit}>
-            <div>Title: <input type="text" name="title" placeholder="title" onChange={this.handleInput}></input></div>
+            <div>Title: <input autoFocus id="title-audio" type="text" name="title" placeholder="title" onChange={this.handleInput}></input></div>
             <div>Message: <textarea className="text-area-form" rows="20" cols="43" name="message" placeholder="message" value={transcript} onFocus={this.handleTextArea} onChange={this.handleTextArea}></textarea></div>
             <div>Tag: <input type="text" name="tag" placeholder="tag" onChange={this.handleInput}></input></div>
             
