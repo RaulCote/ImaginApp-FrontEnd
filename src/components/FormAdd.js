@@ -48,13 +48,22 @@ handleTextArea = (event) => {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const { title, message, tag, is_Public, owner,my_transcript } = this.state;
+    const { title, message, tag, is_Public, owner,my_transcript, is_Text,is_Audio } = this.state;
+    let finalMessage ='';
+    if (is_Text){
+      finalMessage = message
+    }
+    if (is_Audio){
+      finalMessage = this.props.finalTranscript
+    }
+
+
     let arrayTag = []
     arrayTag.push(tag);
       speechService.addSpeech({
       title: title,
-      message: my_transcript,
-      // message: this.props.finalTranscript,
+      // message: my_transcript,
+      message: finalMessage,
       tag: tag,
       is_Public: is_Public,
       owner,
