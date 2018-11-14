@@ -8,6 +8,7 @@ class Signup extends Component {
   state = {
     username: "",
     password: "",
+    alert: "",
   };
 
   handleFormSubmit = (event) => {
@@ -24,8 +25,26 @@ class Signup extends Component {
         this.props.setUser(user);
         this.props.history.push('/private');
       })
-      .catch( error => console.log(error) )
-  }
+      .catch( error => {
+        const { data } = error.response;
+        switch(data.error){
+          case 'username-not-unique':     // checked
+            this.setState({
+              alert: 'Username is already in use, try another one.'
+            });
+            break;
+          case 'empty': // checked
+            this.setState({
+              alert: 'Username or password can´t be empty.'
+            });
+            break;
+          default:
+            this.setState({
+              alert: ''
+            })
+        }   
+      })
+    }
 
   handleChange = (event) => {  
     const {name, value} = event.target;
@@ -33,9 +52,9 @@ class Signup extends Component {
   }
 
   render() {
-    const { username, password } = this.state;
+    const { username, password, alert } = this.state;
     return (
-      <div>
+      <React.Fragment>
         <form onSubmit={this.handleFormSubmit}>
           <label>Username:</label>
           <input type="text" name="username" value={username} onChange={this.handleChange}/>
@@ -43,11 +62,11 @@ class Signup extends Component {
           <input type="password" name="password" value={password} onChange={this.handleChange} />
           <input type="submit" value="Signup" />
         </form>
-
+        { alert ? <h1>{alert}</h1> : <div></div> }
         <p>Already have account? 
           <Link to={"/login"}> Login</Link>
         </p>
-      </div>
+      </React.Fragment>
     )
   }
 }
