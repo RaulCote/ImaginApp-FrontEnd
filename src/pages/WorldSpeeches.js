@@ -70,7 +70,7 @@ class WorldSpeeches extends Component {
       .then((result) => {
         console.log('REsultado fav ',result)
         this.setState({
-          alert: 'Speech add to favourites successfully'
+          alert: 'Added to Favs!'
         })
         // if (result){
 
@@ -81,7 +81,7 @@ class WorldSpeeches extends Component {
         switch(data.error){
           case 'already add to favourites':     // checked
             this.setState({
-              alert: 'Speech already add to favourites'
+              alert: 'Speech was already in favs.'
             });
             break;
           default:
@@ -103,7 +103,7 @@ class WorldSpeeches extends Component {
         <h1>Explore Speeches</h1>
         <div className="search-bar">Search: <input  className="form-input" type="search" name="search" value={search} onChange={this.handleSearch}/></div>
       </div>
-      { alert ? <h1>{alert}</h1> : <React.Fragment></React.Fragment>}
+      { alert ? <h1 className="alert-warning">{alert}</h1> : <React.Fragment></React.Fragment>}
       <section className="search-result">
         {isLoading ? <h2>Loading...</h2> : speechesSearch.map((speech, index) => {
           return <div className="search-link-containers" index={index} key={speech.title}>

@@ -59,20 +59,24 @@ class YourSpeeches extends Component {
   render() {
     const { speeches, isLoading, alert} = this.state;
     return (
-      <div>
-        <h1>Your Search</h1>
-        { alert ? <h1>{alert}</h1> : <React.Fragment></React.Fragment>}
-        {isLoading ? <h2>Loading...</h2> : speeches.map((speech, index) => {
-          // if (speech.owner === this.props.user._id) {
-            return <div key={index}>
-            <div><Link key={speech._id} to={`/speeches/${speech._id}`}>{speech.title}</Link></div>
-            <button onClick={() => this.handleDelete(speech._id)}>Delete</button>
-            </div>
-            // }
-        } )}
-          
-
-       </div>
+      <React.Fragment>
+        <div className="container">
+          <h1>Your Speeches</h1>
+        </div>
+        { alert ? <h1 className="alert-warning">{alert}</h1> : <React.Fragment></React.Fragment>}
+        <section className="search-result">
+          {isLoading ? <h2>Loading...</h2> : speeches.map((speech, index) => {
+            // if (speech.owner === this.props.user._id) {
+              return <div className="search-link-containers" key={index}>
+                <div className="search-flex">
+                  <div><Link className="search-links" key={speech._id} to={`/speeches/${speech._id}`}>{speech.title}</Link></div>
+                  <button className="delete-button" onClick={() => this.handleDelete(speech._id)}>Delete</button>
+                </div>
+              </div>
+              // }
+            } )}
+        </section>
+       </React.Fragment>
     )
   }
 }

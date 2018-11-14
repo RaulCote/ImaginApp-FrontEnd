@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 
 /* ---- reset ---- */
 
@@ -18,6 +18,7 @@ body {
 
 @font-face {
   font-family: 'Roboto';
+  src: @import url('https://fonts.googleapis.com/css?family=Roboto');
 }
 
 body {
@@ -39,6 +40,14 @@ h1 {
   width: 70%;
   margin: 0 auto;
   text-align: center;
+}
+
+.alert-warning {
+  font-size: 1em;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 0px;
+  color: rgb(218, 2, 128)
 }
 /* NavBar */
 
@@ -207,6 +216,57 @@ h1 {
   margin: auto auto;
 }
 
+.btn-size-input-small {
+  width: 60px;
+  height: 40px;
+  font-weight: 600;
+  border-radius: 5%;
+  margin-right: 20px;
+  margin-left: 20px;
+  /* margin: auto auto; */
+}
+
+.rec-buttons {
+  background-color: transparent;
+  border: 1px solid transparent;
+  transition-duration: 1s;
+  outline: none;
+}
+
+.rec-buttons:disabled {
+  color: rgba(43, 206, 151, 0.664)
+}
+
+.rec-buttons-launcher-text:active {
+  color: rgba(43, 206, 151, 0.664);
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
+.rec-buttons-launcher-text {
+  color: rgb(218, 2, 128);
+  transition-duration: 2s;
+  background-color: transparent;
+  border: 1px solid transparent;
+  outline: none;
+}
+
+
+.rec-buttons-launcher-audio {
+  color: rgb(218, 2, 128);
+  transition-duration: 2s;
+  background-color: transparent;
+  border: 1px solid transparent;
+  outline: none;
+}
+
+.rec-buttons-launcher-audio:active {
+  color: rgba(43, 206, 151, 0.664);
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
+
 /* Rippler Effect */
 
 .material-button {
@@ -254,6 +314,17 @@ h1 {
   animation: ripple 1s ease-out;
 }
 
+.delete-button {
+  background-color: transparent;
+  color: rgb(218, 2, 128);
+  font-weight: 600;
+  width: 50px;
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+  border-bottom: 2px solid rgb(0, 195, 146);
+}
+
 /* ************************** INPUTS ************************** */
 
 .form-input {
@@ -275,7 +346,7 @@ h1 {
 }
 
 .submit-button-container {
-  padding-top: 40px;
+  padding-top: 20px;
   align-items: center;
   display: flex;
 }
@@ -285,11 +356,56 @@ h1 {
   overflow: hidden;
 }
 
+.form-textarea-special-container {
+  padding-top: 15%;
+  width: 95%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.top-margin {
+  margin-top: 20px;
+}
+
+.bottom-margin {
+  margin-bottom: 20%;
+}
+
+.form-layout {
+  font-weight: 550;
+  color: rgb(10, 161, 124);
+  font-size: 1em;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.form-layout h3 {
+  color: rgb(10, 161, 124);
+}
 .textarea-area-form {
   overflow-y: scroll;
   height: 100px;
   resize: none; /* Remove this if you want the user to resize the textarea */
+  margin: 0 auto;
+  width: 100%;
+  height: 200px;
+  border: 1px solid rgb(0, 141, 106);
+  background-color: transparent;
+  outline: none;
 }
+
+.textarea-container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+/* Radio Buttons */ 
+
+.radio-margins {
+  margin-top: 10px;
+  margin-left: 40%;
+}
+
 
 /* HomePage */
 
@@ -359,7 +475,6 @@ h1 {
   overflow-y: scroll;
   width: 100%;
   height: 330px;
-
 }
 
 .container-search {
