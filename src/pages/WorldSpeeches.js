@@ -69,6 +69,13 @@ class WorldSpeeches extends Component {
     })
   }
 
+  handleFavourites = (id) => {
+    speechService.addFavsSpeech(id)
+      .then((result) => {
+        console.log(result, 'Botón favoritos')
+      })
+  }
+
   render() {
     const { speeches, isLoading, search, speechesSearch } = this.state;
     // console.log(this.props.location);
@@ -81,6 +88,7 @@ class WorldSpeeches extends Component {
         {isLoading ? <h2>Loading...</h2> : speechesSearch.map((speech, index) => {
           return <div index={index} key={speech.title}>
             <div><Link key={speech._id} to={`/speeches/${speech._id}`}>{speech.title}</Link></div>
+            <button onClick={() => this.handleFavourites(speech._id)}>Add to Favourites</button>
             </div>
         } )}
       </div>

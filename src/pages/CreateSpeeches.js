@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import speechService from '../lib/speech-service';
 import { withAuth } from '../lib/authContext';
 import FormAdd from '../components/FormAdd';
 
