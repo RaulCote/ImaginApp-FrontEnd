@@ -6,7 +6,7 @@ import FormProfile from '../components/FormProfile';
 class Profile extends Component {
   render() {
     return (
-      <div class="container">
+      <div className="container">
         <h1>Profile</h1>
         <div><FormProfile /></div> 
       </div>
