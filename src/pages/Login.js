@@ -49,9 +49,11 @@ class Login extends Component {
   }
 
   render() {
-    const { username, password, alert } = this.state;
+    const { username, password, alert} = this.state;
+    
     return (
       <React.Fragment>
+      {/* { !id ? <div>Logueado</div>: <div>No logueado</div> } */}
         <form onSubmit={this.handleFormSubmit}>
           <label>Username:</label>
           <input type="text" name="username" value={username} onChange={this.handleChange}/>

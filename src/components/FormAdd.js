@@ -17,7 +17,11 @@ class FormAdd extends Component {
     my_transcript: '',
     btn_Start: false,
     btn_Stop: true,
-    alert: ''
+    alert: '',
+}
+
+componentDidMount = () => {
+  this.props.resetTranscript();
 }
 
 componentDidUpdate = (prevprops, state) => {
@@ -29,13 +33,10 @@ componentDidUpdate = (prevprops, state) => {
 }
 
 handleTextArea = (event) => {
-  // console.log(this.props.transcript.value);
   this.setState({
     [event.target.name]: event.target.value,
     my_transcript: this.props.finalTranscript
   })
-  console.log('Transcript: ',this.props.finalTranscript.concat(' '));
-
 }
 
   handleInput = (event) => {
@@ -43,23 +44,29 @@ handleTextArea = (event) => {
       [event.target.name]: event.target.value,
       my_transcript: event.target.value
     })
-
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const { title, message, tag, is_Public, owner,my_transcript } = this.state;
-    // const {finalTranscript} = this.props;
+    const { title, message, tag, is_Public, owner,my_transcript, is_Text,is_Audio } = this.state;
+    let finalMessage ='';
+    if (is_Text){
+      finalMessage = message
+    }
+    if (is_Audio){
+      finalMessage = this.props.finalTranscript
+    }
+
+
     let arrayTag = []
     arrayTag.push(tag);
-    // console.log(this.props.finalTranscript);
       speechService.addSpeech({
       title: title,
       // message: my_transcript,
-      message: this.props.finalTranscript,
+      message: finalMessage,
       tag: tag,
       is_Public: is_Public,
-      owner
+      owner,
     })
     .then(() => {
       console.log('ha llegado aquí: handleSubmit')
@@ -68,7 +75,8 @@ handleTextArea = (event) => {
         message: '',
         tag: '',
         is_Public: 'false',
-        alert: ''
+        alert: '',
+        my_transcript: ''
       })
       this.setState({
         isLoading: false,
@@ -86,12 +94,14 @@ handleTextArea = (event) => {
     })
   }
 
+  // Activa el formulario Texto
   handleActivateText = () => {
     this.setState({
       is_Text: true,
       is_Audio: false
     })
   }
+  // Activa el formulario Audio
   handleActivateAudio = () => {
    this.setState({
     is_Audio: true, 
@@ -99,14 +109,33 @@ handleTextArea = (event) => {
    })
  }
 
- handleStart = () => {
-   this.setState({
-    btn_Start:true
+ //Activa la escucha y bloquea el botón de Start
+ handleStartListening = () => {
+  this.setState({
+    btn_Start:true,
+    btn_Stop: false
    })
+  this.props.startListening();
  }
-    
+
+  //Desactiva la escucha y bloquea el botón de Stop and Reset
+ handleStopListening = () => {
+  this.setState({
+    btn_Start: false,
+    btn_Stop: true
+   })
+  this.props.stopListening();
+ }
+
+ // Reinicia la escucha borrando el contenido.
+ handleResetTranscript = () => {
+  this.props.resetTranscript();
+ }
+
+
   render() {
-    const {message, is_Text, is_Audio, btn_Start, alert} = this.state;
+    // Configuración Inicial de react-speech-recognition
+    const {message, is_Text, is_Audio, btn_Start, btn_Stop, alert} = this.state;
     let { finalTranscript, transcript, resetTranscript, browserSupportsSpeechRecognition, startListening, stopListening,recognition } = this.props
     
     recognition.lang = 'es-ES';
@@ -115,13 +144,14 @@ handleTextArea = (event) => {
       return null
     }
 
-
     return (
       <div>
+          {/* Botones que activan los formularios Audio/Text */}
         <button onClick={this.handleActivateAudio}>Use Audio</button>
         <button onClick={this.handleActivateText}>Use Text</button>
         { alert ? <h1>{alert}</h1> : <div></div>}
 
+          {/* Formulario de Texto */}
         {is_Text ? 
         <div>
           <form onSubmit={this.handleSubmit}>
@@ -140,12 +170,12 @@ handleTextArea = (event) => {
         </div>
          : <React.Fragment> </React.Fragment> 
       }
-
+        {/* Formulario de Audio */}
        {is_Audio ? 
         <div> <h2>Audio</h2>
-            <button disabled={false} onChange={this.handleStart} onClick={startListening}>Start</button>
-             <button disabled={btn_Start} onClick={stopListening}>Stop</button>
-             <button onClick={resetTranscript}>Reset</button>
+            <button disabled={btn_Start} onClick={this.handleStartListening}>Start</button>
+             <button disabled={btn_Stop} onClick={this.handleStopListening}>Stop</button>
+             <button disabled={btn_Start} onClick={this.handleResetTranscript}>Reset</button>
              <span>{transcript}</span>
           <form onSubmit={this.handleSubmit}>
             <div>Title: <input type="text" name="title" placeholder="title" onChange={this.handleInput}></input></div>
