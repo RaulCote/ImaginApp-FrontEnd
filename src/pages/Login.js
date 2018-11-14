@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import auth from '../lib/auth-service';
 import { withAuth } from '../lib/authContext';
+
 class Login extends Component {
   state = {
     username: "",
@@ -53,7 +54,6 @@ class Login extends Component {
     
     return (
       <React.Fragment>
-      {/* { !id ? <div>Logueado</div>: <div>No logueado</div> } */}
         <form onSubmit={this.handleFormSubmit}>
           <label>Username:</label>
           <input type="text" name="username" value={username} onChange={this.handleChange}/>
