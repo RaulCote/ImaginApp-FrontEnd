@@ -29,9 +29,7 @@ class WorldSpeeches extends Component {
       isLoading: true,
       values: valueSearch2,
     });
-    const values = this.state.values;
-    console.log('value ', valueSearch)
-    console.log('value2', valueSearch2)
+
     speechService.getSpeech()
       .then(result => {
         this.setState({
@@ -52,10 +50,9 @@ class WorldSpeeches extends Component {
     const result = speeches.filter((speech,index) => {
       let speechTitle = speech.title.toUpperCase();
       let speechTag = speech.tag[0].toUpperCase();
-      console.log(speechTag);
-        if (speechTitle.includes(event.target.value.toUpperCase()) || speechTag.includes(event.target.value.toUpperCase())){
+      let speechMessage = speech.message.toUpperCase();
+        if (speechTitle.includes(event.target.value.toUpperCase()) || speechTag.includes(event.target.value.toUpperCase()) || speechMessage.includes(event.target.value.toUpperCase())){
           speech.index= index;
-          // console.log(comida.index);
           return speech;    
         }
        
@@ -63,16 +60,17 @@ class WorldSpeeches extends Component {
     
     this.setState({
       search: event.target.value,
-      // speeches: result,
       speechesSearch: result,
-
     })
   }
 
   handleFavourites = (id) => {
     speechService.addFavsSpeech(id)
       .then((result) => {
-        console.log(result, 'Botón favoritos')
+        console.log('REsultado fav ',result)
+        // if (result){
+
+        // }
       })
   }
 
@@ -87,7 +85,7 @@ class WorldSpeeches extends Component {
         Search: <input type="search" name="search" value={search} onChange={this.handleSearch}/>
         {isLoading ? <h2>Loading...</h2> : speechesSearch.map((speech, index) => {
           return <div index={index} key={speech.title}>
-            <div><Link key={speech._id} to={`/speeches/${speech._id}`}>{speech.title}</Link></div>
+            <div><Link key={`${speech._id}-${index}`} to={`/speeches/${speech._id}`}>{speech.title}</Link></div>
             <button onClick={() => this.handleFavourites(speech._id)}>Add to Favourites</button>
             </div>
         } )}

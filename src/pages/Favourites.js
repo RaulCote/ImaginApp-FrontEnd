@@ -17,6 +17,7 @@ class Favourites extends Component {
     profileService.getFavourites(this.props.user._id)
       .then(result => {
         console.log(result.favourites, 'nuevo result desde backend')
+        console.log(result.message, 'Solo result.')
         this.setState({
           favourites: result.favourites,
         })

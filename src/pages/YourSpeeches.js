@@ -32,15 +32,13 @@ class YourSpeeches extends Component {
   }
 
   handleDelete = (id) => {
+    console.log('Antes de borrar nada iD: ', id);
     speechService.deleteMySpeechId(id) 
       .then((result) => {
-        if (!result){
-          console.log('Error trying delete speech.', result);
-        }else{
-          console.log('Speech delete succesfully.', result);
+        if (result){       
+          this.props.history.push('/profile/speeches')
+          this.renderUpdate();
         }
-        this.props.history.push('/speeches')
-        this.renderUpdate();
       })
       .catch((error) => {
         console.log('The speech does not exist.', error);
