@@ -10,14 +10,6 @@ class FormProfile extends Component {
     alert: ''
   }
 
-  // componentDidMount(){
-  //     this.setState({
-  //       username: this.props.user.username,
-  //       email: this.props.user.email,
-  //       picture: this.props.user.picture,
-  //   })
-  // }
-
   componentDidMount() {
     this.renderUpdate();
   }
@@ -50,9 +42,6 @@ class FormProfile extends Component {
     })
     .then((result) => {
       this.props.setUser(result)
-      console.log('ha llegado a Profile Edit: handleSubmit')
-      console.log('emailSubmit', email)
-      console.log('result ', result)
       this.setState({
         username: result.username,
         email: result.email,
@@ -76,10 +65,12 @@ class FormProfile extends Component {
     return (
       <React.Fragment>
         <form  onSubmit={this.handleSubmit}>
-          <div>Username: <input className="form-input" type="text" name="username" placeholder="username" value={username} onChange={this.handleInput}></input></div>
-          <div>Email: <input className="form-input" type="email" name="email" placeholder="email" value={email} onChange={this.handleInput}></input></div>
-          <div>Picture: <input className="form-input" type="text" name="picture" placeholder="picture" value={picture} onChange={this.handleInput}></input></div>
-          <div className="submit-button-container"><button className="material-button btn-size-input" type="submit" value="Save Profile" >Save</button></div>         
+          <div className="form-profile">Username: <input className="form-input" type="text" name="username" placeholder="username" value={username} onChange={this.handleInput}></input></div>
+          <div className="form-profile">Email: <input className="form-input" type="email" name="email" placeholder="email" value={email} onChange={this.handleInput}></input></div>
+          <div className="form-profile">Picture: <input className="form-input" type="text" name="picture" placeholder="picture" value={picture} onChange={this.handleInput}></input></div>
+          <div className="submit-button-container">
+              <button className="material-button-input rippler-container btn-size-input" type="submit" value="Save Profile" >Save</button>
+          </div>         
         </form>   
         { alert ? <h1>{alert}</h1> : <div></div>}
       </React.Fragment>

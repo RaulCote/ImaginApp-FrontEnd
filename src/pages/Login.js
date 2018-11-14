@@ -54,14 +54,17 @@ class Login extends Component {
     
     return (
       <React.Fragment>
+      <div className ="container">
+      <h1>Log In</h1>
         <form onSubmit={this.handleFormSubmit}>
-          <label>Username:</label>
-          <input type="text" name="username" value={username} onChange={this.handleChange}/>
-          <label>Password:</label>
-          <input type="password" name="password" value={password} onChange={this.handleChange} />
-          <input type="submit" value="Login" />
-        </form>
+          <div className="form-profile">Username: </div><input className="form-input" type="text" name="username" value={username} onChange={this.handleChange}/>
+          <div className="form-profile">Password: </div><input className="form-input" type="password" name="password" value={password} onChange={this.handleChange} />
+          <div className="submit-button-container">
+            <button className="material-button-input rippler-container btn-size-input" type="submit" value="Login">Log In</button>
+          </div>
+         </form>
         { alert ? <h1>{alert}</h1> : <div></div>}
+        </div>
       </React.Fragment>
     )
   }
