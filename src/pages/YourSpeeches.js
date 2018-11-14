@@ -22,13 +22,11 @@ class YourSpeeches extends Component {
     });
     speechService.getMySpeeches(this.props.user._id)
       .then(result => {
-        if (result){
-          console.log('No hay mensajes', result)
-        }
+       
           this.setState({
             speeches: result,
             isLoading: false,
-            alert:''
+            alert: 'Your Speeches'
           })
             
         
@@ -60,8 +58,9 @@ class YourSpeeches extends Component {
     const { speeches, isLoading, alert} = this.state;
     return (
       <div>
-        <h1>Your Search</h1>
+        
         { alert ? <h1>{alert}</h1> : <React.Fragment></React.Fragment>}
+        <h1>Your Speeches</h1>
         {isLoading ? <h2>Loading...</h2> : speeches.map((speech, index) => {
           // if (speech.owner === this.props.user._id) {
             return <div key={index}>
