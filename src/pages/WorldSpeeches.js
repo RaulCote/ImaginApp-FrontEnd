@@ -98,18 +98,23 @@ class WorldSpeeches extends Component {
     
 
     return (
-      <div>
-        <h1>Speaches Search</h1>
-        Search: <input type="search" name="search" value={search} onChange={this.handleSearch}/>
-        {isLoading ? <h2>Loading...</h2> : speechesSearch.map((speech, index) => {
-          return <div index={index} key={speech.title}>
-            <div><Link key={`${speech._id}-${index}`} to={`/speeches/${speech._id}`}>{speech.title}</Link></div>
-            <button onClick={() => this.handleFavourites(speech._id)}>Add to Favourites</button>
-            </div>
-        } )}
-               { alert ? <h1>{alert}</h1> : <React.Fragment></React.Fragment>}
-
+      <React.Fragment>
+      <div class="search-navbar">
+        <h1>Explore Speeches</h1>
+        <div className="search-bar">Search: <input  className="form-input" type="search" name="search" value={search} onChange={this.handleSearch}/></div>
       </div>
+      { alert ? <h1>{alert}</h1> : <React.Fragment></React.Fragment>}
+      <section className="search-result">
+        {isLoading ? <h2>Loading...</h2> : speechesSearch.map((speech, index) => {
+          return <div className="search-link-containers" index={index} key={speech.title}>
+            <div className="search-flex">
+              <div><Link className="search-links" key={`${speech._id}-${index}`} to={`/speeches/${speech._id}`}>{speech.title}</Link></div>
+              <div><button className="fav-button" onClick={() => this.handleFavourites(speech._id)}>Fav</button></div>
+            </div>
+          </div>
+        } )}
+      </section>
+      </React.Fragment>
     )
   }
 }
