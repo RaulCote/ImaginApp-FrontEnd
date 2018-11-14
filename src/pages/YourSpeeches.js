@@ -17,10 +17,7 @@ class YourSpeeches extends Component {
   }
 
   renderUpdate = () => {
-    // const valueSearch = queryString.parse(this.props.location.search);
-    // const valueSearch2 = this.props.location.search;//queryString.stringify(valueSearch);
-
-    this.setState({
+      this.setState({
       isLoading: true,
     });
     speechService.getMySpeeches(this.props.user._id)
@@ -36,23 +33,19 @@ class YourSpeeches extends Component {
   }
 
   handleDelete = (id) => {
-
-  speechService.deleteMySpeechId(id) 
-    .then((result) => {
-      if (!result){
-        console.log('Error trying delete speech.', result);
-      }else{
+    speechService.deleteMySpeechId(id) 
+      .then((result) => {
+        if (!result){
+          console.log('Error trying delete speech.', result);
+        }else{
+          console.log('Speech delete succesfully.', result);
+        }
         this.props.history.push('/speeches')
-        console.log('Speech delete succesfully.', result);
         this.renderUpdate();
-        // this.props.history.push('/profile/speeches');
-      }
-    })
-    .catch((error) => {
-      console.log('The speech does not exist.', error);
-    }) 
-  
-
+      })
+      .catch((error) => {
+        console.log('The speech does not exist.', error);
+      }) 
   }
 
   render() {

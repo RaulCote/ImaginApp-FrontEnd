@@ -3,7 +3,6 @@ import {withRouter} from 'react-router-dom';
 import { withAuth } from '../lib/authContext';
 import speechService from '../lib/speech-service';
 import SpeechRecognition from 'react-speech-recognition';
-import SpeechAPI from '../components/SpeechAPI';
 
 class FormAdd extends Component {
   state = {

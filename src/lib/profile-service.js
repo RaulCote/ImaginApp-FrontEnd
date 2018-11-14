@@ -17,6 +17,16 @@ class ProfileService {
     return this.profileService.put('/profile', body)
       .then (( { data } ) => data )
   }
+
+  getFavourites() {
+    return this.profileService.get('/profile/favourites')
+      .then (( { data } ) => data )
+  }
+
+  deleteFavourites(id) {
+    return this.profileService.post(`/profile/favourites/${id}`)
+      .then (( { data } ) => data )
+  }
 }
 
 const profileService = new ProfileService();

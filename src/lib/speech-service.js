@@ -34,6 +34,11 @@ class SpeechService {
       .then(({ data }) => data )
   }
 
+  addFavsSpeech(id, body) {
+    return this.speechService.post(`/speeches/${id}`, body)
+      .then(({ data }) => data )
+  }
+
   getEditSpeechId(id,body) {
     return this.speechService.put(`/speeches/${id}`,body)
       .then(({ data }) => data )
