@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom'
 import './index.css';
-import PrivateRoute from './components/PrivateRoute'
+import PrivateRoute from './components/PrivateRoute';
+import PublicRoute from './components/PublicRoute';
 import Navbar from './components/Navbar';
 import Private from './pages/Private';
 import Signup from './pages/Signup';
@@ -26,8 +27,8 @@ class App extends Component {
             {/* <Homepage /> */}
             <Switch>
               <Route exact path="/" component={Homepage} />
-              <Route exact path="/signup" component={Signup} />
-              <Route exact path="/login" component={Login} />   
+              <PublicRoute exact path="/signup" component={Signup} />
+              <PublicRoute exact path="/login" component={Login} />   
               <PrivateRoute exact path="/speeches" component={WorldSpeeches} /> 
               <PrivateRoute exact path="/profile/speeches" component={YourSpeeches} />
               <PrivateRoute exact path="/profile/speeches/new" component={CreateSpeeches} />    

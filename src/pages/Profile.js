@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withAuth } from '../lib/authContext';
-import profileService from '../lib/profile-service';
 import FormProfile from '../components/FormProfile';
 
 

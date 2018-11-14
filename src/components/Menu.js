@@ -11,31 +11,31 @@ class Menu extends Component {
         <Link to='/profile' className="material-button btn-size-nav">
           <div className='material-buttons-container'>
             <div><img className="img-navbar" src={process.env.PUBLIC_URL + '/images/persona-blanca.png'} alt='arroba'/></div>
-            <p class="mtn-text1">Profile</p>
+            <p className="mtn-text1">Profile</p>
           </div>
         </Link>
         <Link to='/speeches' className="material-button btn-size-nav">
           <div className='material-buttons-container'>
             <div><img className="img-navbar" src={process.env.PUBLIC_URL + '/images/arroba-blanca.png'} alt='arroba'/></div>
-            <p class="mtn-text2">Explore</p>
+            <p className="mtn-text2">Explore</p>
           </div>
         </Link>
         <Link to='/profile/speeches' className="material-button btn-size-nav">
           <div className='material-buttons-container'>
             <div><img className="img-navbar" src={process.env.PUBLIC_URL + '/images/discurso-blanco.png'} alt='arroba'/></div>
-            <p class="mtn-text3">Yours</p>
+            <p className="mtn-text3">Yours</p>
           </div>
         </Link>
         <Link to='/profile/favourites' className="material-button btn-size-nav">
           <div className='material-buttons-container'>
             <div><img className="img-navbar" src={process.env.PUBLIC_URL + '/images/estrella-blanca.png'} alt='arroba'/></div>
-            <p class="mtn-text4">Fav</p>
+            <p className="mtn-text4">Fav</p>
           </div>
         </Link>
         <Link to='/profile/speeches/new' className="material-button btn-size-nav">
           <div className='material-buttons-container'>
             <div><img className="img-navbar" src={process.env.PUBLIC_URL + '/images/voz-grabar-blanco.png'} alt='arroba'/></div>
-            <p  class="mtn-text5">New</p>
+            <p  className="mtn-text5">New</p>
           </div>
         </Link>
       </div>

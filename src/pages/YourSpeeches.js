@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import speechService from '../lib/speech-service'; 
 import { Link, withRouter } from 'react-router-dom';
-import queryString from 'query-string';
 import { withAuth } from '../lib/authContext';
 
 
@@ -50,7 +49,6 @@ class YourSpeeches extends Component {
 
   render() {
     const { speeches, isLoading } = this.state;
-    let filterSpeeches = [];
     return (
       <div>
         <h1>Your Search</h1>

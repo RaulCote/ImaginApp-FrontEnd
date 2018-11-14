@@ -17,7 +17,7 @@ body {
 
 @font-face {
   font-family: 'Roboto';
-  src: url('/public/Roboto-Regular.ttf');
+  src: @import url('https://fonts.googleapis.com/css?family=Roboto');
 }
 
 body {
@@ -31,7 +31,7 @@ body {
 
 .navbar {
   box-shadow: 2px 2px 2px 2px rgba(6, 107, 65, 0.376);
-  background-color: rgb(5, 53, 59);
+  background-color: rgb(9, 72, 80);
   color: white;
   font-weight: 600;
   top: 0;
@@ -64,7 +64,8 @@ body {
 }
 
 .logout {
-    background-color: rgb(5, 53, 59);
+    background-color: rgb(9, 72, 80);
+    /* background-color: rgb(5, 53, 59); */
     font-weight: 600;
     font-size: 0.9em;
 }
