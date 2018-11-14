@@ -13,6 +13,7 @@ class WorldSpeeches extends Component {
     speechesSearch: [],
     isLoading: true,
     search:'',
+    alert: '',
     // values: queryString.parse(this.props.location.search),
   }
 
@@ -68,14 +69,31 @@ class WorldSpeeches extends Component {
     speechService.addFavsSpeech(id)
       .then((result) => {
         console.log('REsultado fav ',result)
+        this.setState({
+          alert: 'Speech add to favourites successfully'
+        })
         // if (result){
 
         // }
       })
+      .catch( error => {
+        const { data } = error.response;
+        switch(data.error){
+          case 'already add to favourites':     // checked
+            this.setState({
+              alert: 'Speech already add to favourites'
+            });
+            break;
+          default:
+            this.setState({
+              alert: ''
+            })
+        }   
+      })
   }
 
   render() {
-    const { speeches, isLoading, search, speechesSearch } = this.state;
+    const { speeches, isLoading, search, speechesSearch, alert } = this.state;
     // console.log(this.props.location);
     
 
@@ -89,6 +107,8 @@ class WorldSpeeches extends Component {
             <button onClick={() => this.handleFavourites(speech._id)}>Add to Favourites</button>
             </div>
         } )}
+               { alert ? <h1>{alert}</h1> : <React.Fragment></React.Fragment>}
+
       </div>
     )
   }
