@@ -161,12 +161,12 @@ handleTextArea = (event) => {
           <div className="form-layout"><h2>Text</h2></div>
           <form onSubmit={this.handleSubmit}>
             <div className="form-layout">
-            <div>
-                <select className="form-layout" name="language" id="language" onChange={this.handleInput}>
-                  <option value="es-ES">Spanish</option>
-                  <option value="en-EN">English</option>
-                  <option value="pt-PT">Portuguese</option>  
-                  <option value="sv-SE">Swedish</option>                    
+            <div className="dropdown-container">
+                <select className="form-input" name="language" id="language" onChange={this.handleInput}>
+                    <option value="es-ES">Spanish</option>
+                    <option value="en-EN">English</option>
+                    <option value="pt-PT">Portuguese</option>  
+                    <option value="sv-SE">Swedish</option>   
                 </select>
             </div>
               <h3>Title:</h3>
@@ -189,7 +189,7 @@ handleTextArea = (event) => {
                 </div>
             </div>
             
-            <div className="submit-button-container bottom-margin"><button className="material-button-input rippler-container btn-size-input" type="submit" value="Submit speech">Submit</button></div>
+            <div className="submit-button-container bottom-margin  top-margin"><button className="material-button-input rippler-container btn-size-input" type="submit" value="Submit speech">Submit</button></div>
           </form>
         </div>
          : <React.Fragment> </React.Fragment> 
@@ -205,12 +205,14 @@ handleTextArea = (event) => {
           <form onSubmit={this.handleSubmit}>
             <div className="form-layout">
             <div>
-                <select name="language" id="language" onChange={this.handleInput}>
+              <div className="dropdown-container">
+                <select className="form-input" name="language" id="language" onChange={this.handleInput}>
                   <option value="es-ES">Spanish</option>
                   <option value="en-EN">English</option>
                   <option value="pt-PT">Portuguese</option>  
                   <option value="sv-SE">Swedish</option> 
                 </select>
+              </div>
             </div>
               <h3>Title:</h3>
               <input className="form-input" autoFocus id="title-audio" type="text" name="title" placeholder="title" onChange={this.handleInput}></input>
@@ -232,7 +234,7 @@ handleTextArea = (event) => {
               </div>
             </div>
             
-            <div className="submit-button-container bottom-margin"><button className="material-button-input rippler-container btn-size-input" type="submit" value="Submit speech">Submit Speech</button></div>
+            <div className="submit-button-container bottom-margin top-margin"><button className="material-button-input rippler-container btn-size-input" type="submit" value="Submit speech">Submit</button></div>
           </form>
         </div>
          : <React.Fragment> </React.Fragment> 

@@ -16,11 +16,11 @@ body {
 
 /* Typography */
 
-@font-face {
+/* @font-face {
   font-family: 'Roboto';
   src: local('Roboto'), url('./fonts/Roboto-Regular.ttf') format('ttf');
-  /* src: @import url('https://fonts.googleapis.com/css?family=Roboto'); */
-}
+  src: @import url('https://fonts.googleapis.com/css?family=Roboto');
+} */
 
 body {
   font-family: 'Roboto';
@@ -227,6 +227,7 @@ h1 {
   border-radius: 5%;
   margin-right: 20px;
   margin-left: 20px;
+  font-size: 17px;
   /* margin: auto auto; */
 }
 
@@ -395,11 +396,12 @@ h1 {
   border-bottom: 2px solid rgb(0, 141, 106);
 }
 
-.submit-button-container {
-  padding-top: 20px;
-  align-items: center;
-  display: flex;
+.dropdown-container {
+  width: 150px;
+  margin: 0 auto;
+  text-align: center;
 }
+
 
 .rippler-container {
   position: relative;
@@ -419,6 +421,15 @@ h1 {
 
 .bottom-margin {
   margin-bottom: 20%;
+}
+
+.language {
+    font-weight: 550;
+    color: rgb(10, 161, 124);
+    font-size: 1em;
+    width: 90%;
+    text-align: right;
+
 }
 
 .form-layout {
@@ -600,4 +611,8 @@ text-align: center;
   border: 0px;
   color: rgb(218, 2, 128);
 
+}
+
+.top-margin-login {
+  margin-top: 50px;
 }

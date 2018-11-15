@@ -77,7 +77,7 @@ class Signup extends Component {
           <div className="form-profile">Username: <input className="form-input" type="text" name="username" value={username} onChange={this.handleChange}/></div>
           <div className="form-profile">Password: <input className="form-input" type="password" name="password" value={password} onChange={this.handleChange} /></div>
           <div className="submit-button-container">
-            <button className="material-button-input rippler-container btn-size-input" type="submit" value="Signup">Sign Up</button>
+            <button className="material-button-input top-margin-login rippler-container btn-size-input" type="submit" value="Signup">Sign Up</button>
           </div>
         </form>
         { alert ? <h1 className="alert-warning">{alert}</h1> : <div></div> }

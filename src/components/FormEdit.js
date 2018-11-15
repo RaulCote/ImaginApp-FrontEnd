@@ -119,7 +119,7 @@ class FormEdit extends Component {
             <h3>Title:</h3> 
             <input className="form-input" type="text" disabled={!equal} name="title" placeholder="title" value={title} onChange={this.handleInput}></input>
           </div>
-          <div><p>{language}</p></div>
+          <div className="language"><p>{language}</p></div>
           <div className="form-layout">
             <h3>Message:</h3> 
             <textarea className="textarea-area-form" rows="10" cols="43" name="message"  disabled={!equal} placeholder="message" value={message} onChange={this.handleInput}>
@@ -147,7 +147,7 @@ class FormEdit extends Component {
                 checked={false}   
                 onChange={this.handleRadioButton} /></div> 
             </div>:
-               <div className="form-layout"> <div className="radio">Public: 
+              <div className="form-layout"> <div className="radio">Public: 
               <input 
                 type="radio" 
                 value={true} 
@@ -162,11 +162,10 @@ class FormEdit extends Component {
                 name="is_Public"  
                 checked={true}
                 onChange={this.handleRadioButton} /></div> 
-            
               </div>
             } 
             </div>
-          { equal ? <div className="submit-button-container bottom-margin"><button className="material-button-input rippler-container btn-size-input" type="submit" value="Save speech">Submit</button></div>: <React.Fragment> </React.Fragment>}
+          { equal ? <div className="material-buttons-container bottom-margin top-margin"><button className="material-button-input rippler-container btn-size-input" type="submit" value="Save speech">Submit</button></div>: <React.Fragment> </React.Fragment>}
         </form>
       </React.Fragment>
        
