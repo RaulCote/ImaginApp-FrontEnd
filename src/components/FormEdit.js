@@ -12,6 +12,7 @@ class FormEdit extends Component {
     is_Public: this.props.speech.is_Public,
     owner: this.props.user._id,
     checked: !(this.props.speech.is_Public),
+    language: this.props.speech.language,
     alert: ''
   }
 
@@ -23,6 +24,7 @@ class FormEdit extends Component {
       is_Public: this.props.speech.is_Public,
       owner: this.props.user._id,
       checked: this.props.speech.is_Public,
+      language: this.props.speech.language,
     })
   }
 
@@ -45,6 +47,15 @@ class FormEdit extends Component {
     
   }
 
+  handleDropDown = (event)  => {
+  
+    // this.setState({
+    //   [event.target.selectIndex]: index,
+    // })
+    // event.target[event.target.selectedIndex]
+    console.log(event.target.selected)
+  }
+
   helperIsPublic = (is_Public) => {
 
     // console.log(is_Public)
@@ -54,7 +65,7 @@ class FormEdit extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const { title, message, tag, is_Public, owner, checked } = this.state;
+    const { title, message, tag, is_Public, owner, checked, language } = this.state;
     // console.log('tipo id', typeof this.props.speech._id);
 
 
@@ -66,7 +77,8 @@ class FormEdit extends Component {
       tag: tag,
       is_Public: is_Public,// === 'true' ? true : false, //this.helperIsPublic(is_Public),
       owner,
-      checked
+      checked,
+      language,
     })
     .then(() => {
       console.log('ha llegado a Edit: handleSubmit')
@@ -75,7 +87,8 @@ class FormEdit extends Component {
         message: '',
         tag: '',
         is_Public: false,
-        alert: ''
+        alert: '',
+        language: 'es-ES'
       })
     })
     .catch( error => {
@@ -95,13 +108,14 @@ class FormEdit extends Component {
       equal = true;
     } 
     const {title,tag, message, alert} = this.state;
-    let {is_Public} = this.state;
+    let {is_Public, language} = this.state;
     
 
     return (
       <div>      
          { alert ? <h1>{alert}</h1> : <div></div>}
         <form onSubmit={this.handleSubmit}>
+      
           <div>Title: <input type="text" disabled={!equal} name="title" placeholder="title" value={title} onChange={this.handleInput}></input></div>
           <div>Message: <textarea className="text-area-form" rows="10" cols="43" name="message"  disabled={!equal} placeholder="message" value={message} onChange={this.handleInput}></textarea></div>
           <div>Tag: <input type="text"  disabled={!equal} name="tag" placeholder="tag" value={tag} onChange={this.handleInput}></input></div>
@@ -141,6 +155,10 @@ class FormEdit extends Component {
             
               </div>
             } 
+              <div><input type="text"  disabled={!equal} name="tag" placeholder="tag" value={language}/>
+                    
+               
+            </div>
           { equal ? <div><input type="submit" value="Save speech" /></div>: <React.Fragment> </React.Fragment>}
         </form>
   </div>

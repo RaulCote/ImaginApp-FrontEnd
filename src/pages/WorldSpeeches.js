@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import speechService from '../lib/speech-service'; 
 import { Link } from 'react-router-dom';
-import queryString from 'query-string';
+// import queryString from 'query-string';
 import { withAuth } from '../lib/authContext';
+import Loading from "../effects/loading";
+
 
 // const queryString = require('query-string');
 
@@ -22,7 +24,7 @@ class WorldSpeeches extends Component {
   }
 
   renderUpdate = () => {
-    const valueSearch = queryString.parse(this.props.location.search);
+    // const valueSearch = queryString.parse(this.props.location.search);
     const valueSearch2 = this.props.location.search;//queryString.stringify(valueSearch);
     
 
@@ -105,7 +107,7 @@ class WorldSpeeches extends Component {
       </div>
       { alert ? <h1>{alert}</h1> : <React.Fragment></React.Fragment>}
       <section className="search-result">
-        {isLoading ? <h2>Loading...</h2> : speechesSearch.map((speech, index) => {
+        {isLoading ? <h2>Loading2... <Loading /> </h2> : speechesSearch.map((speech, index) => {
           return <div className="search-link-containers" index={index} key={speech.title}>
             <div className="search-flex">
               <div><Link className="search-links" key={`${speech._id}-${index}`} to={`/speeches/${speech._id}`}>{speech.title}</Link></div>

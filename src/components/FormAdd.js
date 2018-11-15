@@ -18,6 +18,7 @@ class FormAdd extends Component {
     btn_Start: false,
     btn_Stop: true,
     alert: '',
+    language: 0
 }
 
 componentDidMount = () => {
@@ -46,9 +47,15 @@ handleTextArea = (event) => {
     })
   }
 
+  handleDropDown = (event) => {
+    this.setState({
+      [event.target.selectedIndex]: event.target.selectedIndex,
+    })
+  }
+
   handleSubmit = (event) => {
     event.preventDefault();
-    const { title, message, tag, is_Public, owner,my_transcript, is_Text,is_Audio } = this.state;
+    const { title, message, tag, is_Public, owner,my_transcript, is_Text,is_Audio, language} = this.state;
     let finalMessage ='';
     if (is_Text){
       finalMessage = message
@@ -67,6 +74,7 @@ handleTextArea = (event) => {
       tag: tag,
       is_Public: is_Public,
       owner,
+      language,
     })
     .then(() => {
       console.log('ha llegado aquí: handleSubmit')
@@ -76,7 +84,8 @@ handleTextArea = (event) => {
         tag: '',
         is_Public: 'false',
         alert: '',
-        my_transcript: ''
+        my_transcript: '',
+        language: ''
       })
       this.setState({
         isLoading: false,
@@ -135,10 +144,10 @@ handleTextArea = (event) => {
 
   render() {
     // Configuración Inicial de react-speech-recognition
-    const {message, is_Text, is_Audio, btn_Start, btn_Stop, alert} = this.state;
+    const {message, is_Text, is_Audio, btn_Start, btn_Stop, alert, language} = this.state;
     let { finalTranscript, transcript, resetTranscript, browserSupportsSpeechRecognition, startListening, stopListening,recognition } = this.props
     
-    recognition.lang = 'es-ES';
+    recognition.lang = language;
 
     if (!browserSupportsSpeechRecognition) {
       return null
@@ -156,6 +165,13 @@ handleTextArea = (event) => {
         <div>
           <form onSubmit={this.handleSubmit}>
             <div>Title: <input autoFocus id="title-text" type="text" name="title" placeholder="title" onChange={this.handleInput}></input></div>
+            <div><select name="language" id="lang-select" onChange={this.handleInput}>
+                    <option value="es-ES">Spanish</option>
+                    <option value="en-EN">English</option>
+                    
+                </select>
+            </div>
+            
             <div>Message: <textarea className="text-area-form" rows="20" cols="43" name="message" placeholder="message" value={message} onChange={this.handleInput}></textarea></div>
             <div>Tag: <input type="text" name="tag" placeholder="tag" onChange={this.handleInput}></input></div>
             
@@ -172,7 +188,14 @@ handleTextArea = (event) => {
       }
         {/* Formulario de Audio */}
        {is_Audio ? 
-        <div> <h2>Audio</h2>
+        <div> <h3>Audio</h3>
+             <div><select name="language" id="language" onChange={this.handleInput}>
+                <option value="es-ES">Spanish</option>
+                <option value="en-EN">English</option>
+                <option value="pt-PT">Portuguese</option>
+                    
+                </select>
+            </div>
             <button disabled={btn_Start} onClick={this.handleStartListening}>Start</button>
              <button disabled={btn_Stop} onClick={this.handleStopListening}>Stop</button>
              <button disabled={btn_Start} onClick={this.handleResetTranscript}>Reset</button>
