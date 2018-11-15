@@ -101,7 +101,7 @@ class WorldSpeeches extends Component {
 
     return (
       <React.Fragment>
-      <div class="search-navbar">
+      <div className="search-navbar">
         <h1>Explore Speeches</h1>
         <div className="search-bar">Search: <input  className="form-input" type="search" name="search" value={search} onChange={this.handleSearch}/></div>
       </div>

@@ -51,15 +51,19 @@ class Favourites extends Component {
     const { favourites, alert } = this.state;
     return (
       <React.Fragment>
-        <div><h1>Favourites</h1></div>
-        { alert ? <h1>{alert}</h1> : <React.Fragment></React.Fragment>}
+        <div className="container-favourites bottom-margin">
+        <h1>Favourites</h1>
           {favourites.map((favourite, index) => {
-            return <div key={index}> 
-              <Link to={`/speeches/${favourite._id}`}>{favourite.title}</Link>
-              <button onClick={() => this.handleDelete(favourite._id)}>Delete from Favourites</button>
+            return <div className="search-link-containers" key={index}>
+              <div className="search-flex">
+                <div><Link className="search-links" to={`/speeches/${favourite._id}`}>{favourite.title}</Link></div>
+                <div><button className="delete-button" onClick={() => this.handleDelete(favourite._id)}>Delete</button></div>
+              </div>
             </div>
           } )}
-               
+          </div>
+          { alert ? <h1>{alert}</h1> : <React.Fragment></React.Fragment>}
+
       </React.Fragment>
       
     )
