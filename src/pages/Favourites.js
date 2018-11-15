@@ -33,13 +33,8 @@ class Favourites extends Component {
 
   handleDelete = (id) => {
     profileService.deleteFavourites(id)
-      .then((result) => {
-          this.setState({
-            alert: 'Speech deleted succesfully ',
-          })
-        
-        console.log('ha entrado despues de delete favourites')
-          this.props.history.push('/profile/favourites')
+      .then((result) => {          
+        this.props.history.push('/profile/favourites')
         this.renderUpdate();
       })
       .catch((error) => {
