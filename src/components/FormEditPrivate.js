@@ -126,19 +126,25 @@ class FormEditPrivate extends Component {
     
 
     return (
-      <div>
-         
-        
+      <React.Fragment>
         <form onSubmit={this.handleSubmit}>
-          <div>Title: <input type="text" disabled={!equal} name="title" placeholder="title" value={title} onChange={this.handleInput}></input></div>
-          <div>Message: <textarea rows="10" cols="80" name="message"  disabled={!equal} placeholder="message" value={message} onChange={this.handleInput}></textarea></div>
-          <div>Tag: <input type="text"  disabled={!equal} name="tag" placeholder="tag" value={tag} onChange={this.handleInput}></input></div>
-          
-        
-               
-          
+          <div className="form-layout">
+            <h3>Title:</h3>
+            <input className="form-input" type="text" disabled={!equal} name="title" placeholder="title" value={title} onChange={this.handleInput}></input>
+          </div>
+          <div className="form-layout">
+            <h3>Message:</h3>
+            <div>
+              <textarea className="textarea-area-form" rows="10" cols="43" name="message"  disabled={!equal} placeholder="message" value={message} onChange={this.handleInput}>
+              </textarea>
+            </div>
+          </div>
+          <div className="form-layout">
+            <h3>Tag:</h3>
+            <input className="form-input" type="text"  disabled={!equal} name="tag" placeholder="tag" value={tag} onChange={this.handleInput}></input>
+          </div>   
         </form>
-  </div>
+      </React.Fragment>
        
     )
   }

@@ -74,22 +74,17 @@ renderUpdate = () => {
     } 
  
     return (
-      <div>
-       { alert ? <h1>{alert}</h1> : <div>
-
-         {isLoading ? <h1>Loading</h1> : <div>{ equal ? 
-          <div><FormEdit speech={speech}/><h1>{speech.title}Soy el Owner</h1> </div>
-                :<div><FormEditPrivate speech={speech}/><h1>{speech.title}No soy el Owner</h1> </div>
-        }</div> }
-        </div>}
-         {/* {isLoading ? <h1>Loading</h1> : <div>{ equal ? 
-          <div><FormEdit speech={speech}/><h1>{speech.title}Soy el Owner</h1> </div>
-                :<div><FormEditPrivate speech={speech}/><h1>{speech.title}No soy el Owner</h1> </div>
-        }</div> }  */}
-      
-        <h2>Speech Detail</h2>   
-        <h3>Hello</h3> 
+      <React.Fragment>
+      <div className="form-textarea-special-container">
+        <h1>Speech Detail</h1>
       </div>
+        { alert ? <h1>{alert}</h1> : <div>
+          {isLoading ? <h1>Loading</h1> : <div>{ equal ? 
+            <div><FormEdit speech={speech}/></div>
+                  :<div><FormEditPrivate speech={speech}/></div>
+          }</div> }
+          </div>}
+      </React.Fragment>
     )
   }
 }

@@ -112,15 +112,24 @@ class FormEdit extends Component {
     
 
     return (
-      <div>      
-         { alert ? <h1>{alert}</h1> : <div></div>}
+      <React.Fragment>      
+         { alert ? <h1 className="alert-warning">{alert}</h1> : <div></div>}
         <form onSubmit={this.handleSubmit}>
-      
-          <div>Title: <input type="text" disabled={!equal} name="title" placeholder="title" value={title} onChange={this.handleInput}></input></div>
-          <div>Message: <textarea className="text-area-form" rows="10" cols="43" name="message"  disabled={!equal} placeholder="message" value={message} onChange={this.handleInput}></textarea></div>
-          <div>Tag: <input type="text"  disabled={!equal} name="tag" placeholder="tag" value={tag} onChange={this.handleInput}></input></div>
-          
-          { is_Public ? <div>
+          <div className="form-layout">
+            <h3>Title:</h3> 
+            <input className="form-input" type="text" disabled={!equal} name="title" placeholder="title" value={title} onChange={this.handleInput}></input>
+          </div>
+          <div className="form-layout">
+            <h3>Message:</h3> 
+            <textarea className="textarea-area-form" rows="10" cols="43" name="message"  disabled={!equal} placeholder="message" value={message} onChange={this.handleInput}>
+            </textarea>
+          </div>
+          <div className="form-layout">
+            <h3>Tag:</h3> 
+            <input  className="form-input" type="text" disabled={!equal} name="tag" placeholder="tag" value={tag} onChange={this.handleInput}></input>
+          </div>
+          <div className="radio-margins">
+          { is_Public ? <div className="form-layout">
             <div className="radio">Public: 
               <input 
                 type="radio"  
@@ -137,7 +146,7 @@ class FormEdit extends Component {
                 checked={false}   
                 onChange={this.handleRadioButton} /></div> 
             </div>:
-               <div> <div className="radio">Public: 
+               <div className="form-layout"> <div className="radio">Public: 
               <input 
                 type="radio" 
                 value={true} 
@@ -155,13 +164,10 @@ class FormEdit extends Component {
             
               </div>
             } 
-              <div><input type="text"  disabled={!equal} name="tag" placeholder="tag" value={language}/>
-                    
-               
             </div>
-          { equal ? <div><input type="submit" value="Save speech" /></div>: <React.Fragment> </React.Fragment>}
+          { equal ? <div className="submit-button-container bottom-margin"><button className="material-button-input rippler-container btn-size-input" type="submit" value="Save speech">Submit</button></div>: <React.Fragment> </React.Fragment>}
         </form>
-  </div>
+      </React.Fragment>
        
     )
   }

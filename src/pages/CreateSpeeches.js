@@ -6,10 +6,9 @@ class CreateSpeeches extends Component {
 
   render() {
     return (
-      <div>
+      <div className="form-textarea-special-container">
         <h1>Create Speeches</h1>
         <FormAdd />
-        <p>Should redirect to YourSpeeches after submiting form.</p>
       </div>
     )
   }

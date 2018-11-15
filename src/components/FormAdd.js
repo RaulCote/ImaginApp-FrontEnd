@@ -18,7 +18,7 @@ class FormAdd extends Component {
     btn_Start: false,
     btn_Stop: true,
     alert: '',
-    language: 0
+    language: 'es-ES'
 }
 
 componentDidMount = () => {
@@ -147,7 +147,8 @@ handleTextArea = (event) => {
     const {message, is_Text, is_Audio, btn_Start, btn_Stop, alert, language} = this.state;
     let { finalTranscript, transcript, resetTranscript, browserSupportsSpeechRecognition, startListening, stopListening,recognition } = this.props
     
-    recognition.lang = language;
+    // recognition.lang = language;
+    recognition.lang = 'es-ES';
 
     if (!browserSupportsSpeechRecognition) {
       return null
@@ -156,62 +157,71 @@ handleTextArea = (event) => {
     return (
       <div>
           {/* Botones que activan los formularios Audio/Text */}
-        <button onClick={this.handleActivateAudio}>Use Audio</button>
-        <button onClick={this.handleActivateText}>Use Text</button>
-        { alert ? <h1>{alert}</h1> : <div></div>}
+        <button  className="rec-buttons-launcher-audio btn-size-input-small" onClick={this.handleActivateAudio}>Audio</button>
+        <button  className="rec-buttons-launcher-text btn-size-input-small" onClick={this.handleActivateText}>Text</button>
+        { alert ? <h1 className="alert-warning">{alert}</h1> : <div></div>}
 
           {/* Formulario de Texto */}
         {is_Text ? 
         <div>
+          <div className="form-layout"><h2>Text</h2></div>
           <form onSubmit={this.handleSubmit}>
-            <div>Title: <input autoFocus id="title-text" type="text" name="title" placeholder="title" onChange={this.handleInput}></input></div>
-            <div><select name="language" id="lang-select" onChange={this.handleInput}>
-                    <option value="es-ES">Spanish</option>
-                    <option value="en-EN">English</option>
-                    
-                </select>
+            <div className="form-layout">
+              <h3>Title:</h3>
+              <input className="form-input" autoFocus id="title-text" type="text" name="title" placeholder="title" onChange={this.handleInput}></input>
+            </div>
+            <div className="form-layout">
+              <h3>Message:</h3>
+              <textarea className="textarea-area-form" rows="10" cols="43" name="message" placeholder="message" value={message} onChange={this.handleInput}></textarea>
+            </div>
+            <div className="form-layout">
+              <h3>Tag:</h3>
+              <input className="form-input" type="text" name="tag" placeholder="tag" onChange={this.handleInput}></input>
+            </div>
+            <div className="top-margin">
+                <div className="form-layout">
+                  <div className="radio">Public:
+                    <input type="radio" id="is_Public" name="is_Public" value="true" required onClick={this.handleInput}/></div>
+                  <div className="radio">Private:
+                    <input type="radio" id="is_not_Public" name="is_Public" value="false" onClick={this.handleInput}/></div>
+                </div>
             </div>
             
-            <div>Message: <textarea className="text-area-form" rows="20" cols="43" name="message" placeholder="message" value={message} onChange={this.handleInput}></textarea></div>
-            <div>Tag: <input type="text" name="tag" placeholder="tag" onChange={this.handleInput}></input></div>
-            
-            <div className="radio">Public:
-              <input type="radio" id="is_Public" name="is_Public" value="true" required onClick={this.handleInput}/></div>
-            <div className="radio">Private:
-              <input type="radio" id="is_not_Public" name="is_Public" value="false" onClick={this.handleInput}/></div>
-
-            
-            <div><input type="submit" value="Submit speech" /></div>
+            <div className="submit-button-container bottom-margin"><button className="material-button-input rippler-container btn-size-input" type="submit" value="Submit speech">Submit</button></div>
           </form>
         </div>
          : <React.Fragment> </React.Fragment> 
       }
         {/* Formulario de Audio */}
        {is_Audio ? 
-        <div> <h3>Audio</h3>
-             <div><select name="language" id="language" onChange={this.handleInput}>
-                <option value="es-ES">Spanish</option>
-                <option value="en-EN">English</option>
-                <option value="pt-PT">Portuguese</option>
-                    
-                </select>
-            </div>
-            <button disabled={btn_Start} onClick={this.handleStartListening}>Start</button>
-             <button disabled={btn_Stop} onClick={this.handleStopListening}>Stop</button>
-             <button disabled={btn_Start} onClick={this.handleResetTranscript}>Reset</button>
-             <span>{transcript}</span>
+        <div> 
+          <div className="form-layout"><h2>Audio</h2></div>
+            <button className="rec-buttons btn-size-input-small" disabled={btn_Start} onClick={this.handleStartListening}>Start</button>
+             <button className="rec-buttons btn-size-input-small" disabled={btn_Stop} onClick={this.handleStopListening}>Stop</button>
+             <button className="rec-buttons btn-size-input-small" disabled={btn_Start} onClick={this.handleResetTranscript}>Reset</button>
           <form onSubmit={this.handleSubmit}>
-            <div>Title: <input autoFocus id="title-audio" type="text" name="title" placeholder="title" onChange={this.handleInput}></input></div>
-            <div>Message: <textarea className="text-area-form" rows="20" cols="43" name="message" placeholder="message" value={transcript} onFocus={this.handleTextArea} onChange={this.handleTextArea}></textarea></div>
-            <div>Tag: <input type="text" name="tag" placeholder="tag" onChange={this.handleInput}></input></div>
+            <div className="form-layout">
+              <h3>Title:</h3>
+              <input className="form-input" autoFocus id="title-audio" type="text" name="title" placeholder="title" onChange={this.handleInput}></input>
+            </div>
+            <div className="form-layout">
+              <h3>Message:</h3>
+              <textarea className="textarea-area-form" rows="20" cols="43" name="message" placeholder="message" value={transcript} onFocus={this.handleTextArea} onChange={this.handleTextArea}></textarea>
+            </div>
+            <div className="form-layout">
+              <h3>Tag:</h3>
+              <input  className="form-input" type="text" name="tag" placeholder="tag" onChange={this.handleInput}></input>
+            </div>
+            <div className="top-margin">
+              <div className="form-layout">
+                <div className="radio">Public:
+                  <input type="radio" id="is_Public" name="is_Public" value="true" required onClick={this.handleInput}/></div>
+                <div className="radio">Private:
+                  <input type="radio" id="is_not_Public" name="is_Public" value="false" onClick={this.handleInput}/></div>
+              </div>
+            </div>
             
-            <div className="radio">Public:
-              <input type="radio" id="is_Public" name="is_Public" value="true" required onClick={this.handleInput}/></div>
-            <div className="radio">Private:
-              <input type="radio" id="is_not_Public" name="is_Public" value="false" onClick={this.handleInput}/></div>
-
-            
-            <div><input type="submit" value="Submit speech" /></div>
+            <div className="submit-button-container bottom-margin"><button className="material-button-input rippler-container btn-size-input" type="submit" value="Submit speech">Submit Speech</button></div>
           </form>
         </div>
          : <React.Fragment> </React.Fragment> 
