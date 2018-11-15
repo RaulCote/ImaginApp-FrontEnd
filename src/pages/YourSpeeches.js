@@ -24,8 +24,9 @@ class YourSpeeches extends Component {
           this.setState({
             speeches: result,
             isLoading: false,
-            alert: 'Your Speeches'
-          })             
+          })
+            
+        
       })
       .catch(error => {
           this.setState({

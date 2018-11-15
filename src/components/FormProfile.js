@@ -78,7 +78,7 @@ class FormProfile extends Component {
           <div className="form-profile">Email: <input className="form-input" type="email" name="email" placeholder="email" value={email || ''} onChange={this.handleInput}></input></div>
           <div className="form-profile">Picture: <input className="form-input" type="text" name="picture" placeholder="picture" value={picture || ''} onChange={this.handleInput}></input></div>
           <div className="submit-button-container">
-              <button className="material-button-input rippler-container btn-size-input" type="submit" value="Save Profile" >Save</button>
+              <button className="material-button-input rippler-container btn-size-input top-margin-login" type="submit" value="Save Profile">Save</button>
           </div>         
         </form>   
         { alert ? <h1 className="alert-warning">{alert}</h1> : <div></div>}

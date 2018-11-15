@@ -89,7 +89,7 @@ class FormEditPrivate extends Component {
       <React.Fragment>
         <form onSubmit={this.handleSubmit}>
           <div className="form-layout">
-          <div><p>{language}</p></div>
+          <div className="language"><p>{language}</p></div>
             <h3>Title:</h3>
             <input className="form-input" type="text" disabled={!equal} name="title" placeholder="title" value={title} onChange={this.handleInput}></input>
           </div>
