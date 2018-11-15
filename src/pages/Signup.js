@@ -21,7 +21,7 @@ class Signup extends Component {
       this.setState({
         alert: 'Username or password can not be empty.',
       })
-    }  else if (password.length < 7) {
+    }  else if (password.length < 6) {
       this.setState({
         alert: 'Minimum password length should be 6.',
       })
@@ -43,12 +43,12 @@ class Signup extends Component {
         .catch( error => {
           const { data } = error.response;
           switch(data.error){
-            case 'username-not-unique':     // checked
+            case 'username-not-unique':    
               this.setState({
                 alert: 'Username is already in use, try another one.'
               });
               break;
-            case 'empty': // checked
+            case 'empty': 
               this.setState({
                 alert: 'Username or password can´t be empty.'
               });

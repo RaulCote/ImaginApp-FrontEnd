@@ -71,7 +71,7 @@ class Login extends Component {
             <button className="material-button-input rippler-container btn-size-input" type="submit" value="Login">Log In</button>
           </div>
          </form>
-        { alert ? <h1>{alert}</h1> : <div></div>}
+        { alert ? <h1 className="alert-warning">{alert}</h1> : <div></div>}
         </div>
       </React.Fragment>
     )
