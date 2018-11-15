@@ -55,17 +55,20 @@ class Signup extends Component {
     const { username, password, alert } = this.state;
     return (
       <React.Fragment>
+      <div className="container">
+      <h1>Sign Up</h1>
         <form onSubmit={this.handleFormSubmit}>
-          <label>Username:</label>
-          <input type="text" name="username" value={username} onChange={this.handleChange}/>
-          <label>Password:</label>
-          <input type="password" name="password" value={password} onChange={this.handleChange} />
-          <input type="submit" value="Signup" />
+          <div className="form-profile">Username: <input className="form-input" type="text" name="username" value={username} onChange={this.handleChange}/></div>
+          <div className="form-profile">Password: <input className="form-input" type="password" name="password" value={password} onChange={this.handleChange} /></div>
+          <div className="submit-button-container">
+            <button className="material-button-input rippler-container btn-size-input" type="submit" value="Signup">Sign Up</button>
+          </div>
         </form>
-        { alert ? <h1>{alert}</h1> : <div></div> }
-        <p>Already have account? 
-          <Link to={"/login"}> Login</Link>
+        { alert ? <h1 className="alert-warning">{alert}</h1> : <div></div> }
+        <p className="signup-login-p">Already have an account? 
+          <Link className="signup-login-link" to={"/login"}> Login</Link>
         </p>
+      </div>
       </React.Fragment>
     )
   }
