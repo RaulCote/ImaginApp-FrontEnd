@@ -13,6 +13,8 @@ class FormEditPrivate extends Component {
     is_Public: this.props.speech.is_Public,
     owner: this.props.user._id,
     checked: !(this.props.speech.is_Public),
+    language: this.props.speech.language,
+
   }
 
   componentDidMount(){
@@ -23,6 +25,7 @@ class FormEditPrivate extends Component {
       is_Public: this.props.speech.is_Public,
       owner: this.props.user._id,
       checked: this.props.speech.is_Public,
+      language: this.props.speech.language,
     })
     console.log('Is public peta', this.props.speech.is_Public)
   }
@@ -91,7 +94,7 @@ class FormEditPrivate extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const { title, message, tag, is_Public, owner, checked } = this.state;
+    const { title, message, tag, is_Public, owner, checked , language} = this.state;
     // console.log('tipo id', typeof this.props.speech._id);
 
 
@@ -103,7 +106,8 @@ class FormEditPrivate extends Component {
       tag: tag,
       is_Public: is_Public,// === 'true' ? true : false, //this.helperIsPublic(is_Public),
       owner,
-      checked
+      checked,
+      language
     })
     .then(() => {
       console.log('ha llegado a Edit: handleSubmit')
@@ -112,6 +116,7 @@ class FormEditPrivate extends Component {
         message: '',
         tag: '',
         is_Public: false,
+        language: 'es-ES'
       })
     })
   }
@@ -121,7 +126,7 @@ class FormEditPrivate extends Component {
     if (this.props.user._id === this.props.speech.owner){
       equal = true;
     } 
-    const {title,tag, message} = this.state;
+    const {title,tag, message, language} = this.state;
     let {is_Public, checked} = this.state;
     
 
@@ -129,6 +134,7 @@ class FormEditPrivate extends Component {
       <React.Fragment>
         <form onSubmit={this.handleSubmit}>
           <div className="form-layout">
+          <div><p>{language}</p></div>
             <h3>Title:</h3>
             <input className="form-input" type="text" disabled={!equal} name="title" placeholder="title" value={title} onChange={this.handleInput}></input>
           </div>

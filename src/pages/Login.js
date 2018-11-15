@@ -13,35 +13,43 @@ class Login extends Component {
     event.preventDefault();
     const { username, password } = this.state
 
-    auth.login({ username, password })
-    .then( (user) => {
-      this.props.setUser(user)
-      this.props.history.push('/private'); 
+    //FontEnd validation 
+    if (!username || !password) {
+      this.setState({
+        alert: 'Username or password can not be empty.',
     })
-    .catch( error => {
-      const { data } = error.response;
-      switch(data.error){
-        case 'User or password invalid':
-          this.setState({
-            alert: 'invalid username'
-          });
-          break;
-        case 'not-found':
-          this.setState({
-            alert: 'User or password invalid.'
-          });
-          break;
-        case 'validation':
-          this.setState({
-            alert: 'Username or password can´t be empty.'
-          });
-          break;
-        default:
-          this.setState({
-            alert: ''
-          })
-      }   
-    })
+    }else{ 
+      //BackEnd Validation
+      auth.login({ username, password })
+      .then( (user) => {
+        this.props.setUser(user)
+        this.props.history.push('/private'); 
+      })
+      .catch( error => {
+        const { data } = error.response;
+        switch(data.error){
+          case 'User or password invalid':
+            this.setState({
+              alert: 'invalid username'
+            });
+            break;
+          case 'not-found':
+            this.setState({
+              alert: 'User or password invalid.'
+            });
+            break;
+          case 'validation':
+            this.setState({
+              alert: 'Username or password can not be empty.'
+            });
+            break;
+          default:
+            this.setState({
+              alert: ''
+            })
+        }   
+      })
+    }
   }
 
   handleChange = (event) => {  

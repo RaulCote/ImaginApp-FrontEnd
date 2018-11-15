@@ -16,34 +16,50 @@ class Signup extends Component {
     const username = this.state.username;
     const password = this.state.password;
 
-    auth.signup({ username, password })
-      .then( (user) => {
-        this.setState({
-            username: "",
-            password: "",
-        });
-        this.props.setUser(user);
-        this.props.history.push('/private');
+    // FrontEnd Validation
+    if (!username || !password) {
+      this.setState({
+        alert: 'Username or password can not be empty.',
       })
-      .catch( error => {
-        const { data } = error.response;
-        switch(data.error){
-          case 'username-not-unique':     // checked
-            this.setState({
-              alert: 'Username is already in use, try another one.'
-            });
-            break;
-          case 'empty': // checked
-            this.setState({
-              alert: 'Username or password can´t be empty.'
-            });
-            break;
-          default:
-            this.setState({
-              alert: ''
-            })
-        }   
+    }  else if (password.length < 7) {
+      this.setState({
+        alert: 'Minimum password length should be 6.',
       })
+    }else  if ( username.length < 4 ) {
+      this.setState({
+        alert: 'Minimum username length should be 3.',
+    })} else {
+    
+      //BackEnd Validation
+      auth.signup({ username, password })
+        .then( (user) => {
+          this.setState({
+              username: "",
+              password: "",
+          });
+          this.props.setUser(user);
+          this.props.history.push('/private');
+        })
+        .catch( error => {
+          const { data } = error.response;
+          switch(data.error){
+            case 'username-not-unique':     // checked
+              this.setState({
+                alert: 'Username is already in use, try another one.'
+              });
+              break;
+            case 'empty': // checked
+              this.setState({
+                alert: 'Username or password can´t be empty.'
+              });
+              break;
+            default:
+              this.setState({
+                alert: ''
+              })
+          }   
+        })
+      }
     }
 
   handleChange = (event) => {  

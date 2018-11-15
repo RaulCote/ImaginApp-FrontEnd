@@ -119,6 +119,7 @@ class FormEdit extends Component {
             <h3>Title:</h3> 
             <input className="form-input" type="text" disabled={!equal} name="title" placeholder="title" value={title} onChange={this.handleInput}></input>
           </div>
+          <div><p>{language}</p></div>
           <div className="form-layout">
             <h3>Message:</h3> 
             <textarea className="textarea-area-form" rows="10" cols="43" name="message"  disabled={!equal} placeholder="message" value={message} onChange={this.handleInput}>

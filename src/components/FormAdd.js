@@ -47,12 +47,6 @@ handleTextArea = (event) => {
     })
   }
 
-  handleDropDown = (event) => {
-    this.setState({
-      [event.target.selectedIndex]: event.target.selectedIndex,
-    })
-  }
-
   handleSubmit = (event) => {
     event.preventDefault();
     const { title, message, tag, is_Public, owner,my_transcript, is_Text,is_Audio, language} = this.state;
@@ -147,8 +141,8 @@ handleTextArea = (event) => {
     const {message, is_Text, is_Audio, btn_Start, btn_Stop, alert, language} = this.state;
     let { finalTranscript, transcript, resetTranscript, browserSupportsSpeechRecognition, startListening, stopListening,recognition } = this.props
     
-    // recognition.lang = language;
-    recognition.lang = 'es-ES';
+    recognition.lang = language;
+    // recognition.lang = 'es-ES';
 
     if (!browserSupportsSpeechRecognition) {
       return null
@@ -167,6 +161,14 @@ handleTextArea = (event) => {
           <div className="form-layout"><h2>Text</h2></div>
           <form onSubmit={this.handleSubmit}>
             <div className="form-layout">
+            <div>
+                <select className="form-layout" name="language" id="language" onChange={this.handleInput}>
+                  <option value="es-ES">Spanish</option>
+                  <option value="en-EN">English</option>
+                  <option value="pt-PT">Portuguese</option>  
+                  <option value="sv-SE">Swedish</option>                    
+                </select>
+            </div>
               <h3>Title:</h3>
               <input className="form-input" autoFocus id="title-text" type="text" name="title" placeholder="title" onChange={this.handleInput}></input>
             </div>
@@ -199,8 +201,17 @@ handleTextArea = (event) => {
             <button className="rec-buttons btn-size-input-small" disabled={btn_Start} onClick={this.handleStartListening}>Start</button>
              <button className="rec-buttons btn-size-input-small" disabled={btn_Stop} onClick={this.handleStopListening}>Stop</button>
              <button className="rec-buttons btn-size-input-small" disabled={btn_Start} onClick={this.handleResetTranscript}>Reset</button>
+             
           <form onSubmit={this.handleSubmit}>
             <div className="form-layout">
+            <div>
+                <select name="language" id="language" onChange={this.handleInput}>
+                  <option value="es-ES">Spanish</option>
+                  <option value="en-EN">English</option>
+                  <option value="pt-PT">Portuguese</option>  
+                  <option value="sv-SE">Swedish</option> 
+                </select>
+            </div>
               <h3>Title:</h3>
               <input className="form-input" autoFocus id="title-audio" type="text" name="title" placeholder="title" onChange={this.handleInput}></input>
             </div>

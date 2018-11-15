@@ -108,7 +108,7 @@ class WorldSpeeches extends Component {
       { alert ? <h1 className="alert-warning">{alert}</h1> : <React.Fragment></React.Fragment>}
       <section className="search-result">
         {isLoading ? <h2>Loading2... <Loading /> </h2> : speechesSearch.map((speech, index) => {
-          return <div className="search-link-containers" index={index} key={speech.title}>
+          return <div className="search-link-containers" index={index} key={`${speech.title}-${index}`}>
             <div className="search-flex">
               <div><Link className="search-links" key={`${speech._id}-${index}`} to={`/speeches/${speech._id}`}>{speech.title}</Link></div>
               <div><button className="fav-button" onClick={() => this.handleFavourites(speech._id)}>Fav</button></div>
