@@ -49,7 +49,7 @@ handleTextArea = (event) => {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const { title, message, tag, is_Public, owner,my_transcript, is_Text,is_Audio, language} = this.state;
+    const { title, message, tag, is_Public, owner, is_Text,is_Audio, language} = this.state;
     let finalMessage ='';
     if (is_Text){
       finalMessage = message
@@ -63,7 +63,6 @@ handleTextArea = (event) => {
     arrayTag.push(tag);
       speechService.addSpeech({
       title: title,
-      // message: my_transcript,
       message: finalMessage,
       tag: tag,
       is_Public: is_Public,
@@ -71,7 +70,6 @@ handleTextArea = (event) => {
       language,
     })
     .then(() => {
-      console.log('ha llegado aquí: handleSubmit')
       this.setState({
         title: '',
         message: '',
@@ -139,11 +137,11 @@ handleTextArea = (event) => {
   render() {
     // Configuración Inicial de react-speech-recognition
     const {message, is_Text, is_Audio, btn_Start, btn_Stop, alert, language} = this.state;
-    let { finalTranscript, transcript, resetTranscript, browserSupportsSpeechRecognition, startListening, stopListening,recognition } = this.props
+    let { transcript, browserSupportsSpeechRecognition,recognition } = this.props
     
     recognition.lang = language;
-    // recognition.lang = 'es-ES';
 
+    // Si el Browser no soporta el reconocimiento de voz, no carga.
     if (!browserSupportsSpeechRecognition) {
       return null
     }
@@ -237,13 +235,7 @@ handleTextArea = (event) => {
         </div>
          : <React.Fragment> </React.Fragment> 
       }
-
-
-
       </div>
-
-      
-
     )
   }
 }

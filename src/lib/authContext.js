@@ -26,17 +26,12 @@ export default class AuthContext extends Component {
     authService.me()
     .then((user)=>{
       this.renderUpdate();
-      // this.setState({
-      //   user,
-      //   isLoading : false,
-      //   isLogged : true
-      // })
     })
     .catch((error)=>{
       this.setState({
         isLogged : false,
         user : null,
-        isLoading : false //
+        isLoading : false 
       })
     })
   }
@@ -68,7 +63,7 @@ export default class AuthContext extends Component {
       })
     })
     .catch((error)=>{
-      console.log('Hay que manejar errores')
+      console.warn('error')
     })
   }
 

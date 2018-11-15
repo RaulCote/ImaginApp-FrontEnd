@@ -17,8 +17,6 @@ class Favourites extends Component {
   renderUpdate = () => {
     profileService.getFavourites(this.props.user._id)
       .then(result => {
-        // console.log(result.favourites, 'nuevo result desde backend')
-        // console.log(result.message, 'Solo result.')
         this.setState({
           favourites: result.favourites,
           alert: ''
@@ -38,8 +36,8 @@ class Favourites extends Component {
         this.renderUpdate();
       })
       .catch((error) => {
-        console.log('errror Raúl', error)
-      })
+        console.warn('error')    
+    })
   }
 
   render() {

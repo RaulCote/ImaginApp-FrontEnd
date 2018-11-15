@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { withAuth } from '../lib/authContext';
 import speechService from '../lib/speech-service';
-import SpeechRecognition from 'react-speech-recognition';
-
 
 
 class FormEditPrivate extends Component {
@@ -27,40 +25,9 @@ class FormEditPrivate extends Component {
       checked: this.props.speech.is_Public,
       language: this.props.speech.language,
     })
-    console.log('Is public peta', this.props.speech.is_Public)
   }
 
-  // static getDerivedStateFromProps(nextProps,prevState) {
-  //   if (nextProps.is_Public !== prevState.is_Public) {
-  //       return {is_Public: nextProps.is_Public}
-  //   }else{
-  //      return null;     
-  //   }
-  // }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   if(prevProps.is_Public!==this.props.is_Public){
-  //     //Perform some operation here
-  //     this.setState({is_Public: this.props.is_Public});
-  //     this.classMethod();
-  //   }
-
-  //   }
-   
-   //https://hackernoon.com/replacing-componentwillreceiveprops-with-getderivedstatefromprops-c3956f7ce607
-
-//   componentDidUpdate = (prevprops, state) => {
-//   if (this.props.is_Public !== prevprops.is_Public){
-//     this.setState({
-//       is_Public: this.props.is_Public,
-//       checked: this.props.is_Public
-//     })
-//   }
-// }
-
-
   handleInputTexarea = (event,transcript) => {
-    console.log(transcript);
     this.setState({
       [event.target.name]: event.target.value.concat(transcript),
     })
@@ -73,21 +40,14 @@ class FormEditPrivate extends Component {
   }
 
   handleRadioButton = (event) => {
-    const {is_Public} = this.state;
-    // console.log('tipo public', typeof is_Public);
     const helper = this.helperIsPublic(event.target.value);
-    // console.log('tipo de helper' ,typeof helper);
-    // console.log('helper ',helper);
+    
     this.setState({
       is_Public: helper,
-    })
-    // console.log('despues', is_Public);
-    
+    })    
   }
 
   helperIsPublic = (is_Public) => {
-
-    // console.log(is_Public)
 
     return is_Public === 'true' ? true : false;
   }
@@ -95,8 +55,6 @@ class FormEditPrivate extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const { title, message, tag, is_Public, owner, checked , language} = this.state;
-    // console.log('tipo id', typeof this.props.speech._id);
-
 
     let arrayTag = []
     arrayTag.push(tag);
@@ -104,13 +62,12 @@ class FormEditPrivate extends Component {
       title: title,
       message: message,
       tag: tag,
-      is_Public: is_Public,// === 'true' ? true : false, //this.helperIsPublic(is_Public),
+      is_Public: is_Public,
       owner,
       checked,
       language
     })
     .then(() => {
-      console.log('ha llegado a Edit: handleSubmit')
       this.setState({
         title: '',
         message: '',
@@ -127,9 +84,7 @@ class FormEditPrivate extends Component {
       equal = true;
     } 
     const {title,tag, message, language} = this.state;
-    let {is_Public, checked} = this.state;
     
-
     return (
       <React.Fragment>
         <form onSubmit={this.handleSubmit}>
@@ -155,6 +110,5 @@ class FormEditPrivate extends Component {
     )
   }
 }
-
 
 export default  withAuth(FormEditPrivate);

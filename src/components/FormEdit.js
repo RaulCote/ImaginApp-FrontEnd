@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {withRouter} from 'react-router-dom';
 import { withAuth } from '../lib/authContext';
 import speechService from '../lib/speech-service';
 
@@ -16,7 +17,7 @@ class FormEdit extends Component {
     alert: ''
   }
 
-  componentDidMount(){
+  componentDidMount = () => {
     this.setState({
       title: this.props.speech.title,
       message: this.props.speech.message,
@@ -35,30 +36,14 @@ class FormEdit extends Component {
   }
 
   handleRadioButton = (event) => {
-    const {is_Public} = this.state;
-    // console.log('tipo public', typeof is_Public);
     const helper = this.helperIsPublic(event.target.value);
-    // console.log('tipo de helper' ,typeof helper);
-    // console.log('helper ',helper);
     this.setState({
       is_Public: helper,
     })
-
-    
   }
 
-  handleDropDown = (event)  => {
-  
-    // this.setState({
-    //   [event.target.selectIndex]: index,
-    // })
-    // event.target[event.target.selectedIndex]
-    console.log(event.target.selected)
-  }
 
   helperIsPublic = (is_Public) => {
-
-    // console.log(is_Public)
 
     return is_Public === 'true' ? true : false;
   }
@@ -66,8 +51,6 @@ class FormEdit extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const { title, message, tag, is_Public, owner, checked, language } = this.state;
-    // console.log('tipo id', typeof this.props.speech._id);
-
 
     let arrayTag = []
     arrayTag.push(tag);
@@ -75,21 +58,27 @@ class FormEdit extends Component {
       title: title,
       message: message,
       tag: tag,
-      is_Public: is_Public,// === 'true' ? true : false, //this.helperIsPublic(is_Public),
+      is_Public: is_Public,
       owner,
       checked,
       language,
     })
     .then(() => {
-      console.log('ha llegado a Edit: handleSubmit')
       this.setState({
         title: '',
         message: '',
         tag: '',
         is_Public: false,
         alert: '',
+        owner: '',
         language: 'es-ES'
       })
+      this.setState({
+        isLoading: false,
+      })
+      this.props.history.push('/profile/speeches');
+
+
     })
     .catch( error => {
       const { data } = error.response;
@@ -175,4 +164,4 @@ class FormEdit extends Component {
 }
 
 
-export default  withAuth(FormEdit);
+export default  withRouter(withAuth(FormEdit));

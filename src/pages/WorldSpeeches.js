@@ -37,7 +37,7 @@ class WorldSpeeches extends Component {
         })
       })
       .catch(error => {
-        console.log('Error renderList', error);
+        console.warn('error')
       })
   }
 
@@ -52,7 +52,7 @@ class WorldSpeeches extends Component {
           speech.index= index;
           return speech;    
         }
-       
+       return result;
     })
     
     this.setState({
@@ -64,7 +64,6 @@ class WorldSpeeches extends Component {
   handleFavourites = (id) => {
     speechService.addFavsSpeech(id)
       .then((result) => {
-        console.log('REsultado fav ',result)
         this.setState({
           alert: 'Added to Favs!'
         })
@@ -86,9 +85,7 @@ class WorldSpeeches extends Component {
   }
 
   render() {
-    const { speeches, isLoading, search, speechesSearch, alert } = this.state;
-
-    
+    const { isLoading, search, speechesSearch, alert } = this.state;
 
     return (
       <React.Fragment>

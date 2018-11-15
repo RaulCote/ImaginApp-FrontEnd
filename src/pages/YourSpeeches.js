@@ -4,7 +4,6 @@ import { Link, withRouter } from 'react-router-dom';
 import { withAuth } from '../lib/authContext';
 
 
-
 class YourSpeeches extends Component {
   state = {
     speeches: [],
@@ -21,15 +20,12 @@ class YourSpeeches extends Component {
       isLoading: true,
     });
     speechService.getMySpeeches(this.props.user._id)
-      .then(result => {
-       
+      .then(result => {      
           this.setState({
             speeches: result,
             isLoading: false,
             alert: 'Your Speeches'
-          })
-            
-        
+          })             
       })
       .catch(error => {
           this.setState({
@@ -39,7 +35,6 @@ class YourSpeeches extends Component {
   }
 
   handleDelete = (id) => {
-    // console.log('Antes de borrar nada iD: ', id);
     speechService.deleteMySpeechId(id) 
       .then((result) => {
         if (result){       
@@ -64,7 +59,6 @@ class YourSpeeches extends Component {
         { alert ? <h1 className="alert-warning">{alert}</h1> : <React.Fragment></React.Fragment>}
         <section className="search-result-you">
           {isLoading ? <h2>Loading...</h2> : speeches.map((speech, index) => {
-            // if (speech.owner === this.props.user._id) {
               return <div key={index}>
                 <div className="card">
                   <div className="search-link-containers">
@@ -73,17 +67,15 @@ class YourSpeeches extends Component {
                       <button className="delete-button" onClick={() => this.handleDelete(speech._id)}>Delete</button>
                     </div>
                   </div>
-                  <div class="message-container"><p>{speech.message}</p></div>
+                  <div className="message-container"><p>{speech.message}</p></div>
                 
                 </div>
               </div>
-              // }
             } )}
         </section>
        </React.Fragment>
     )
   }
 }
-
 
 export default withRouter(withAuth(YourSpeeches));

@@ -41,21 +41,10 @@ renderUpdate = () => {
       
       switch(data.error){
         case 'user not found':
-        console.log('Error del back', data);    
           this.setState({
             alert: 'Error 404: Speech not found'
           });
           break;
-        // case 'not-found':
-        //   this.setState({
-        //     alert: 'User or password invalid.'
-        //   });
-        //   break;
-        // case 'validation':
-        //   this.setState({
-        //     alert: 'Username or password can´t be empty.'
-        //   });
-        //   break;
         default:
           this.setState({
             alert: ''

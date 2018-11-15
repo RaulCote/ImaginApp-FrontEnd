@@ -9,7 +9,6 @@ class SpeechService {
   }
 
   getSpeech() {
-    // return this.speechService.get('/speeches')
     return this.speechService.get('/speeches?is_Public=true')
       .then(({ data }) => data )
   }
@@ -18,11 +17,6 @@ class SpeechService {
     return this.speechService.get(`/speeches?owner=${idUser}`)
       .then(({ data }) => data )
   }
-
-  // getMySpeeches(id) {
-  //   return this.speechService.get(`/speeches?id=${id}`)
-  //     .then(({ data }) => data )
-  // }
 
   getSpeechId(id) {
     return this.speechService.get(`/speeches/${id}`)
